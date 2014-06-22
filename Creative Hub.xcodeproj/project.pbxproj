@@ -1,0 +1,472 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		ADE09CE4195744D500EDA814 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE09CE3195744D500EDA814 /* Foundation.framework */; };
+		ADE09CE6195744D500EDA814 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE09CE5195744D500EDA814 /* CoreGraphics.framework */; };
+		ADE09CE8195744D500EDA814 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE09CE7195744D500EDA814 /* UIKit.framework */; };
+		ADE09CEE195744D500EDA814 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ADE09CEC195744D500EDA814 /* InfoPlist.strings */; };
+		ADE09CF0195744D500EDA814 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE09CEF195744D500EDA814 /* main.m */; };
+		ADE09CF4195744D500EDA814 /* GCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE09CF3195744D500EDA814 /* GCAppDelegate.m */; };
+		ADE09CF7195744D500EDA814 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADE09CF5195744D500EDA814 /* Main.storyboard */; };
+		ADE09CFA195744D500EDA814 /* GCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE09CF9195744D500EDA814 /* GCViewController.m */; };
+		ADE09CFC195744D500EDA814 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADE09CFB195744D500EDA814 /* Images.xcassets */; };
+		ADE09D03195744D500EDA814 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE09D02195744D500EDA814 /* XCTest.framework */; };
+		ADE09D04195744D500EDA814 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE09CE3195744D500EDA814 /* Foundation.framework */; };
+		ADE09D05195744D500EDA814 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE09CE7195744D500EDA814 /* UIKit.framework */; };
+		ADE09D0D195744D500EDA814 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ADE09D0B195744D500EDA814 /* InfoPlist.strings */; };
+		ADE09D0F195744D500EDA814 /* Creative_HubTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE09D0E195744D500EDA814 /* Creative_HubTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		ADE09D06195744D500EDA814 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ADE09CD8195744D500EDA814 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ADE09CDF195744D500EDA814;
+			remoteInfo = "Creative Hub";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		ADE09CE0195744D500EDA814 /* Creative Hub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Creative Hub.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADE09CE3195744D500EDA814 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		ADE09CE5195744D500EDA814 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		ADE09CE7195744D500EDA814 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		ADE09CEB195744D500EDA814 /* Creative Hub-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Creative Hub-Info.plist"; sourceTree = "<group>"; };
+		ADE09CED195744D500EDA814 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		ADE09CEF195744D500EDA814 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		ADE09CF1195744D500EDA814 /* Creative Hub-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Creative Hub-Prefix.pch"; sourceTree = "<group>"; };
+		ADE09CF2195744D500EDA814 /* GCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GCAppDelegate.h; sourceTree = "<group>"; };
+		ADE09CF3195744D500EDA814 /* GCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GCAppDelegate.m; sourceTree = "<group>"; };
+		ADE09CF6195744D500EDA814 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		ADE09CF8195744D500EDA814 /* GCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GCViewController.h; sourceTree = "<group>"; };
+		ADE09CF9195744D500EDA814 /* GCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GCViewController.m; sourceTree = "<group>"; };
+		ADE09CFB195744D500EDA814 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		ADE09D01195744D500EDA814 /* Creative HubTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Creative HubTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADE09D02195744D500EDA814 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		ADE09D0A195744D500EDA814 /* Creative HubTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Creative HubTests-Info.plist"; sourceTree = "<group>"; };
+		ADE09D0C195744D500EDA814 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		ADE09D0E195744D500EDA814 /* Creative_HubTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Creative_HubTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ADE09CDD195744D500EDA814 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADE09CE6195744D500EDA814 /* CoreGraphics.framework in Frameworks */,
+				ADE09CE8195744D500EDA814 /* UIKit.framework in Frameworks */,
+				ADE09CE4195744D500EDA814 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADE09CFE195744D500EDA814 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADE09D03195744D500EDA814 /* XCTest.framework in Frameworks */,
+				ADE09D05195744D500EDA814 /* UIKit.framework in Frameworks */,
+				ADE09D04195744D500EDA814 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		ADE09CD7195744D500EDA814 = {
+			isa = PBXGroup;
+			children = (
+				ADE09CE9195744D500EDA814 /* Creative Hub */,
+				ADE09D08195744D500EDA814 /* Creative HubTests */,
+				ADE09CE2195744D500EDA814 /* Frameworks */,
+				ADE09CE1195744D500EDA814 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		ADE09CE1195744D500EDA814 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ADE09CE0195744D500EDA814 /* Creative Hub.app */,
+				ADE09D01195744D500EDA814 /* Creative HubTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ADE09CE2195744D500EDA814 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ADE09CE3195744D500EDA814 /* Foundation.framework */,
+				ADE09CE5195744D500EDA814 /* CoreGraphics.framework */,
+				ADE09CE7195744D500EDA814 /* UIKit.framework */,
+				ADE09D02195744D500EDA814 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ADE09CE9195744D500EDA814 /* Creative Hub */ = {
+			isa = PBXGroup;
+			children = (
+				ADE09CF2195744D500EDA814 /* GCAppDelegate.h */,
+				ADE09CF3195744D500EDA814 /* GCAppDelegate.m */,
+				ADE09CF5195744D500EDA814 /* Main.storyboard */,
+				ADE09CF8195744D500EDA814 /* GCViewController.h */,
+				ADE09CF9195744D500EDA814 /* GCViewController.m */,
+				ADE09CFB195744D500EDA814 /* Images.xcassets */,
+				ADE09CEA195744D500EDA814 /* Supporting Files */,
+			);
+			path = "Creative Hub";
+			sourceTree = "<group>";
+		};
+		ADE09CEA195744D500EDA814 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				ADE09CEB195744D500EDA814 /* Creative Hub-Info.plist */,
+				ADE09CEC195744D500EDA814 /* InfoPlist.strings */,
+				ADE09CEF195744D500EDA814 /* main.m */,
+				ADE09CF1195744D500EDA814 /* Creative Hub-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ADE09D08195744D500EDA814 /* Creative HubTests */ = {
+			isa = PBXGroup;
+			children = (
+				ADE09D0E195744D500EDA814 /* Creative_HubTests.m */,
+				ADE09D09195744D500EDA814 /* Supporting Files */,
+			);
+			path = "Creative HubTests";
+			sourceTree = "<group>";
+		};
+		ADE09D09195744D500EDA814 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				ADE09D0A195744D500EDA814 /* Creative HubTests-Info.plist */,
+				ADE09D0B195744D500EDA814 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ADE09CDF195744D500EDA814 /* Creative Hub */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADE09D12195744D500EDA814 /* Build configuration list for PBXNativeTarget "Creative Hub" */;
+			buildPhases = (
+				ADE09CDC195744D500EDA814 /* Sources */,
+				ADE09CDD195744D500EDA814 /* Frameworks */,
+				ADE09CDE195744D500EDA814 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Creative Hub";
+			productName = "Creative Hub";
+			productReference = ADE09CE0195744D500EDA814 /* Creative Hub.app */;
+			productType = "com.apple.product-type.application";
+		};
+		ADE09D00195744D500EDA814 /* Creative HubTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADE09D15195744D500EDA814 /* Build configuration list for PBXNativeTarget "Creative HubTests" */;
+			buildPhases = (
+				ADE09CFD195744D500EDA814 /* Sources */,
+				ADE09CFE195744D500EDA814 /* Frameworks */,
+				ADE09CFF195744D500EDA814 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ADE09D07195744D500EDA814 /* PBXTargetDependency */,
+			);
+			name = "Creative HubTests";
+			productName = "Creative HubTests";
+			productReference = ADE09D01195744D500EDA814 /* Creative HubTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ADE09CD8195744D500EDA814 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = GC;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Chao Gu";
+				TargetAttributes = {
+					ADE09D00195744D500EDA814 = {
+						TestTargetID = ADE09CDF195744D500EDA814;
+					};
+				};
+			};
+			buildConfigurationList = ADE09CDB195744D500EDA814 /* Build configuration list for PBXProject "Creative Hub" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = ADE09CD7195744D500EDA814;
+			productRefGroup = ADE09CE1195744D500EDA814 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ADE09CDF195744D500EDA814 /* Creative Hub */,
+				ADE09D00195744D500EDA814 /* Creative HubTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ADE09CDE195744D500EDA814 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADE09CFC195744D500EDA814 /* Images.xcassets in Resources */,
+				ADE09CEE195744D500EDA814 /* InfoPlist.strings in Resources */,
+				ADE09CF7195744D500EDA814 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADE09CFF195744D500EDA814 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADE09D0D195744D500EDA814 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ADE09CDC195744D500EDA814 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADE09CF4195744D500EDA814 /* GCAppDelegate.m in Sources */,
+				ADE09CFA195744D500EDA814 /* GCViewController.m in Sources */,
+				ADE09CF0195744D500EDA814 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADE09CFD195744D500EDA814 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADE09D0F195744D500EDA814 /* Creative_HubTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		ADE09D07195744D500EDA814 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ADE09CDF195744D500EDA814 /* Creative Hub */;
+			targetProxy = ADE09D06195744D500EDA814 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		ADE09CEC195744D500EDA814 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ADE09CED195744D500EDA814 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		ADE09CF5195744D500EDA814 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ADE09CF6195744D500EDA814 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		ADE09D0B195744D500EDA814 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ADE09D0C195744D500EDA814 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		ADE09D10195744D500EDA814 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		ADE09D11195744D500EDA814 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		ADE09D13195744D500EDA814 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Creative Hub/Creative Hub-Prefix.pch";
+				INFOPLIST_FILE = "Creative Hub/Creative Hub-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		ADE09D14195744D500EDA814 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Creative Hub/Creative Hub-Prefix.pch";
+				INFOPLIST_FILE = "Creative Hub/Creative Hub-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		ADE09D16195744D500EDA814 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Creative Hub.app/Creative Hub";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Creative Hub/Creative Hub-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Creative HubTests/Creative HubTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		ADE09D17195744D500EDA814 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Creative Hub.app/Creative Hub";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Creative Hub/Creative Hub-Prefix.pch";
+				INFOPLIST_FILE = "Creative HubTests/Creative HubTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ADE09CDB195744D500EDA814 /* Build configuration list for PBXProject "Creative Hub" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADE09D10195744D500EDA814 /* Debug */,
+				ADE09D11195744D500EDA814 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ADE09D12195744D500EDA814 /* Build configuration list for PBXNativeTarget "Creative Hub" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADE09D13195744D500EDA814 /* Debug */,
+				ADE09D14195744D500EDA814 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		ADE09D15195744D500EDA814 /* Build configuration list for PBXNativeTarget "Creative HubTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADE09D16195744D500EDA814 /* Debug */,
+				ADE09D17195744D500EDA814 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ADE09CD8195744D500EDA814 /* Project object */;
+}
