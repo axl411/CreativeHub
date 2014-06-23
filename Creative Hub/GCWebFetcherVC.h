@@ -1,5 +1,5 @@
 //
-//  GCViewController.h
+//  GCWebFetcherVC.h
 //  Creative Hub
 //
 //  Created by 顾超 on 14-6-22.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GCViewController : UIViewController
+@interface GCWebFetcherVC : UIViewController
 
 @end

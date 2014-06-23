@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD7624B1195865140044366D /* GCWebImagesIndexVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7624B0195865140044366D /* GCWebImagesIndexVC.m */; };
+		AD7624B4195879D20044366D /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = AD7624B3195879D20044366D /* Podfile */; };
 		ADE09CE4195744D500EDA814 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE09CE3195744D500EDA814 /* Foundation.framework */; };
 		ADE09CE6195744D500EDA814 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE09CE5195744D500EDA814 /* CoreGraphics.framework */; };
 		ADE09CE8195744D500EDA814 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE09CE7195744D500EDA814 /* UIKit.framework */; };
@@ -14,13 +16,15 @@
 		ADE09CF0195744D500EDA814 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE09CEF195744D500EDA814 /* main.m */; };
 		ADE09CF4195744D500EDA814 /* GCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE09CF3195744D500EDA814 /* GCAppDelegate.m */; };
 		ADE09CF7195744D500EDA814 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADE09CF5195744D500EDA814 /* Main.storyboard */; };
-		ADE09CFA195744D500EDA814 /* GCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE09CF9195744D500EDA814 /* GCViewController.m */; };
 		ADE09CFC195744D500EDA814 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADE09CFB195744D500EDA814 /* Images.xcassets */; };
 		ADE09D03195744D500EDA814 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE09D02195744D500EDA814 /* XCTest.framework */; };
 		ADE09D04195744D500EDA814 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE09CE3195744D500EDA814 /* Foundation.framework */; };
 		ADE09D05195744D500EDA814 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE09CE7195744D500EDA814 /* UIKit.framework */; };
 		ADE09D0D195744D500EDA814 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ADE09D0B195744D500EDA814 /* InfoPlist.strings */; };
 		ADE09D0F195744D500EDA814 /* Creative_HubTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE09D0E195744D500EDA814 /* Creative_HubTests.m */; };
+		ADE09D1D19574CC000EDA814 /* GCAlbumVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE09D1C19574CC000EDA814 /* GCAlbumVC.m */; };
+		ADE09D2019575DF700EDA814 /* GCWebFetcherVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE09D1F19575DF700EDA814 /* GCWebFetcherVC.m */; };
+		D2B70BC6F2254A91BCAA578F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D77226D6E0E4696B7802206 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +38,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1D77226D6E0E4696B7802206 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD7624AF195865140044366D /* GCWebImagesIndexVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCWebImagesIndexVC.h; path = ../GCWebImagesIndexVC.h; sourceTree = "<group>"; };
+		AD7624B0195865140044366D /* GCWebImagesIndexVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCWebImagesIndexVC.m; path = ../GCWebImagesIndexVC.m; sourceTree = "<group>"; };
+		AD7624B3195879D20044366D /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		ADE09CE0195744D500EDA814 /* Creative Hub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Creative Hub.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADE09CE3195744D500EDA814 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		ADE09CE5195744D500EDA814 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -45,14 +53,18 @@
 		ADE09CF2195744D500EDA814 /* GCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GCAppDelegate.h; sourceTree = "<group>"; };
 		ADE09CF3195744D500EDA814 /* GCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GCAppDelegate.m; sourceTree = "<group>"; };
 		ADE09CF6195744D500EDA814 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		ADE09CF8195744D500EDA814 /* GCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GCViewController.h; sourceTree = "<group>"; };
-		ADE09CF9195744D500EDA814 /* GCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GCViewController.m; sourceTree = "<group>"; };
 		ADE09CFB195744D500EDA814 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		ADE09D01195744D500EDA814 /* Creative HubTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Creative HubTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADE09D02195744D500EDA814 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		ADE09D0A195744D500EDA814 /* Creative HubTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Creative HubTests-Info.plist"; sourceTree = "<group>"; };
 		ADE09D0C195744D500EDA814 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		ADE09D0E195744D500EDA814 /* Creative_HubTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Creative_HubTests.m; sourceTree = "<group>"; };
+		ADE09D1B19574CC000EDA814 /* GCAlbumVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCAlbumVC.h; sourceTree = "<group>"; };
+		ADE09D1C19574CC000EDA814 /* GCAlbumVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCAlbumVC.m; sourceTree = "<group>"; };
+		ADE09D1E19575DF700EDA814 /* GCWebFetcherVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCWebFetcherVC.h; sourceTree = "<group>"; };
+		ADE09D1F19575DF700EDA814 /* GCWebFetcherVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCWebFetcherVC.m; sourceTree = "<group>"; };
+		ADE09D2F1957661F00EDA814 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		C55A1ACEF2EF4E68A16EB308 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +75,7 @@
 				ADE09CE6195744D500EDA814 /* CoreGraphics.framework in Frameworks */,
 				ADE09CE8195744D500EDA814 /* UIKit.framework in Frameworks */,
 				ADE09CE4195744D500EDA814 /* Foundation.framework in Frameworks */,
+				D2B70BC6F2254A91BCAA578F /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,13 +92,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AD7624B2195865210044366D /* Web Image Retrieve */ = {
+			isa = PBXGroup;
+			children = (
+				ADE09D1E19575DF700EDA814 /* GCWebFetcherVC.h */,
+				ADE09D1F19575DF700EDA814 /* GCWebFetcherVC.m */,
+				AD7624AF195865140044366D /* GCWebImagesIndexVC.h */,
+				AD7624B0195865140044366D /* GCWebImagesIndexVC.m */,
+			);
+			name = "Web Image Retrieve";
+			sourceTree = "<group>";
+		};
+		ADDD921719576FB0000B1C0F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				ADE09D1B19574CC000EDA814 /* GCAlbumVC.h */,
+				ADE09D1C19574CC000EDA814 /* GCAlbumVC.m */,
+				AD7624B2195865210044366D /* Web Image Retrieve */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		ADE09CD7195744D500EDA814 = {
 			isa = PBXGroup;
 			children = (
+				AD7624B3195879D20044366D /* Podfile */,
 				ADE09CE9195744D500EDA814 /* Creative Hub */,
 				ADE09D08195744D500EDA814 /* Creative HubTests */,
 				ADE09CE2195744D500EDA814 /* Frameworks */,
 				ADE09CE1195744D500EDA814 /* Products */,
+				C55A1ACEF2EF4E68A16EB308 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,10 +137,12 @@
 		ADE09CE2195744D500EDA814 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ADE09D2F1957661F00EDA814 /* libxml2.dylib */,
 				ADE09CE3195744D500EDA814 /* Foundation.framework */,
 				ADE09CE5195744D500EDA814 /* CoreGraphics.framework */,
 				ADE09CE7195744D500EDA814 /* UIKit.framework */,
 				ADE09D02195744D500EDA814 /* XCTest.framework */,
+				1D77226D6E0E4696B7802206 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -115,9 +153,8 @@
 				ADE09CF2195744D500EDA814 /* GCAppDelegate.h */,
 				ADE09CF3195744D500EDA814 /* GCAppDelegate.m */,
 				ADE09CF5195744D500EDA814 /* Main.storyboard */,
-				ADE09CF8195744D500EDA814 /* GCViewController.h */,
-				ADE09CF9195744D500EDA814 /* GCViewController.m */,
 				ADE09CFB195744D500EDA814 /* Images.xcassets */,
+				ADDD921719576FB0000B1C0F /* Controllers */,
 				ADE09CEA195744D500EDA814 /* Supporting Files */,
 			);
 			path = "Creative Hub";
@@ -159,9 +196,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ADE09D12195744D500EDA814 /* Build configuration list for PBXNativeTarget "Creative Hub" */;
 			buildPhases = (
+				7436CBBE9A0F479A8349F848 /* Check Pods Manifest.lock */,
 				ADE09CDC195744D500EDA814 /* Sources */,
 				ADE09CDD195744D500EDA814 /* Frameworks */,
 				ADE09CDE195744D500EDA814 /* Resources */,
+				7679D9FE806A4818A5328C43 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -200,6 +239,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Chao Gu";
 				TargetAttributes = {
+					ADE09CDF195744D500EDA814 = {
+						DevelopmentTeam = ETWTQ4R6PG;
+					};
 					ADE09D00195744D500EDA814 = {
 						TestTargetID = ADE09CDF195744D500EDA814;
 					};
@@ -231,6 +273,7 @@
 			files = (
 				ADE09CFC195744D500EDA814 /* Images.xcassets in Resources */,
 				ADE09CEE195744D500EDA814 /* InfoPlist.strings in Resources */,
+				AD7624B4195879D20044366D /* Podfile in Resources */,
 				ADE09CF7195744D500EDA814 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -245,13 +288,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		7436CBBE9A0F479A8349F848 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		7679D9FE806A4818A5328C43 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		ADE09CDC195744D500EDA814 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD7624B1195865140044366D /* GCWebImagesIndexVC.m in Sources */,
+				ADE09D1D19574CC000EDA814 /* GCAlbumVC.m in Sources */,
+				ADE09D2019575DF700EDA814 /* GCWebFetcherVC.m in Sources */,
 				ADE09CF4195744D500EDA814 /* GCAppDelegate.m in Sources */,
-				ADE09CFA195744D500EDA814 /* GCViewController.m in Sources */,
 				ADE09CF0195744D500EDA814 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -334,6 +412,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -366,6 +448,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -374,12 +460,15 @@
 		};
 		ADE09D13195744D500EDA814 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C55A1ACEF2EF4E68A16EB308 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Creative Hub/Creative Hub-Prefix.pch";
 				INFOPLIST_FILE = "Creative Hub/Creative Hub-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -387,12 +476,15 @@
 		};
 		ADE09D14195744D500EDA814 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C55A1ACEF2EF4E68A16EB308 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Creative Hub/Creative Hub-Prefix.pch";
 				INFOPLIST_FILE = "Creative Hub/Creative Hub-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -457,6 +549,7 @@
 				ADE09D14195744D500EDA814 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		ADE09D15195744D500EDA814 /* Build configuration list for PBXNativeTarget "Creative HubTests" */ = {
 			isa = XCConfigurationList;
@@ -465,6 +558,7 @@
 				ADE09D17195744D500EDA814 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
