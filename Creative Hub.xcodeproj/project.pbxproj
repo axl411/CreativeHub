@@ -7,14 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AD7624B1195865140044366D /* GCWebImagesIndexVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7624B0195865140044366D /* GCWebImagesIndexVC.m */; };
+		AD2270F7195C50A9002B179A /* STFU_UIAccessibilityLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = AD2270F6195C50A9002B179A /* STFU_UIAccessibilityLoader.m */; };
+		AD6AFA57195F2CB80064090E /* GUCSketchingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AD6AFA56195F2CB80064090E /* GUCSketchingVC.m */; };
+		AD6AFA5C195F49E60064090E /* GUCSketchingView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD6AFA5B195F49E60064090E /* GUCSketchingView.m */; };
+		AD6AFA6A195F52270064090E /* GUCSketchingTools.m in Sources */ = {isa = PBXBuildFile; fileRef = AD6AFA69195F52270064090E /* GUCSketchingTools.m */; };
+		AD7624B1195865140044366D /* GUCWebImagesIndexVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7624B0195865140044366D /* GUCWebImagesIndexVC.m */; };
 		AD7624B4195879D20044366D /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = AD7624B3195879D20044366D /* Podfile */; };
+		ADA38F271961C679000420EE /* GUCLayerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA38F261961C679000420EE /* GUCLayerCell.m */; };
+		ADA38F2A1961C6B2000420EE /* GUCLayersVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA38F291961C6B2000420EE /* GUCLayersVC.m */; };
+		ADA38F2D1961C975000420EE /* GUCLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA38F2C1961C975000420EE /* GUCLayer.m */; };
 		ADE09CE4195744D500EDA814 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE09CE3195744D500EDA814 /* Foundation.framework */; };
 		ADE09CE6195744D500EDA814 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE09CE5195744D500EDA814 /* CoreGraphics.framework */; };
 		ADE09CE8195744D500EDA814 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE09CE7195744D500EDA814 /* UIKit.framework */; };
 		ADE09CEE195744D500EDA814 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ADE09CEC195744D500EDA814 /* InfoPlist.strings */; };
 		ADE09CF0195744D500EDA814 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE09CEF195744D500EDA814 /* main.m */; };
-		ADE09CF4195744D500EDA814 /* GCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE09CF3195744D500EDA814 /* GCAppDelegate.m */; };
+		ADE09CF4195744D500EDA814 /* GUCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE09CF3195744D500EDA814 /* GUCAppDelegate.m */; };
 		ADE09CF7195744D500EDA814 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADE09CF5195744D500EDA814 /* Main.storyboard */; };
 		ADE09CFC195744D500EDA814 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADE09CFB195744D500EDA814 /* Images.xcassets */; };
 		ADE09D03195744D500EDA814 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE09D02195744D500EDA814 /* XCTest.framework */; };
@@ -22,8 +29,8 @@
 		ADE09D05195744D500EDA814 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE09CE7195744D500EDA814 /* UIKit.framework */; };
 		ADE09D0D195744D500EDA814 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ADE09D0B195744D500EDA814 /* InfoPlist.strings */; };
 		ADE09D0F195744D500EDA814 /* Creative_HubTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE09D0E195744D500EDA814 /* Creative_HubTests.m */; };
-		ADE09D1D19574CC000EDA814 /* GCAlbumVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE09D1C19574CC000EDA814 /* GCAlbumVC.m */; };
-		ADE09D2019575DF700EDA814 /* GCWebFetcherVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE09D1F19575DF700EDA814 /* GCWebFetcherVC.m */; };
+		ADE09D1D19574CC000EDA814 /* GUCAlbumVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE09D1C19574CC000EDA814 /* GUCAlbumVC.m */; };
+		ADE09D2019575DF700EDA814 /* GUCWebFetcherVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE09D1F19575DF700EDA814 /* GUCWebFetcherVC.m */; };
 		D2B70BC6F2254A91BCAA578F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D77226D6E0E4696B7802206 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -39,9 +46,22 @@
 
 /* Begin PBXFileReference section */
 		1D77226D6E0E4696B7802206 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		AD7624AF195865140044366D /* GCWebImagesIndexVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCWebImagesIndexVC.h; path = ../GCWebImagesIndexVC.h; sourceTree = "<group>"; };
-		AD7624B0195865140044366D /* GCWebImagesIndexVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCWebImagesIndexVC.m; path = ../GCWebImagesIndexVC.m; sourceTree = "<group>"; };
+		AD2270F6195C50A9002B179A /* STFU_UIAccessibilityLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFU_UIAccessibilityLoader.m; sourceTree = "<group>"; };
+		AD6AFA55195F2CB80064090E /* GUCSketchingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUCSketchingVC.h; sourceTree = "<group>"; };
+		AD6AFA56195F2CB80064090E /* GUCSketchingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUCSketchingVC.m; sourceTree = "<group>"; };
+		AD6AFA5A195F49E60064090E /* GUCSketchingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUCSketchingView.h; sourceTree = "<group>"; };
+		AD6AFA5B195F49E60064090E /* GUCSketchingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUCSketchingView.m; sourceTree = "<group>"; };
+		AD6AFA68195F52270064090E /* GUCSketchingTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUCSketchingTools.h; sourceTree = "<group>"; };
+		AD6AFA69195F52270064090E /* GUCSketchingTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUCSketchingTools.m; sourceTree = "<group>"; };
+		AD7624AF195865140044366D /* GUCWebImagesIndexVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GUCWebImagesIndexVC.h; path = ../GUCWebImagesIndexVC.h; sourceTree = "<group>"; };
+		AD7624B0195865140044366D /* GUCWebImagesIndexVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GUCWebImagesIndexVC.m; path = ../GUCWebImagesIndexVC.m; sourceTree = "<group>"; };
 		AD7624B3195879D20044366D /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		ADA38F251961C679000420EE /* GUCLayerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUCLayerCell.h; sourceTree = "<group>"; };
+		ADA38F261961C679000420EE /* GUCLayerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUCLayerCell.m; sourceTree = "<group>"; };
+		ADA38F281961C6B2000420EE /* GUCLayersVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUCLayersVC.h; sourceTree = "<group>"; };
+		ADA38F291961C6B2000420EE /* GUCLayersVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUCLayersVC.m; sourceTree = "<group>"; };
+		ADA38F2B1961C975000420EE /* GUCLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUCLayer.h; sourceTree = "<group>"; };
+		ADA38F2C1961C975000420EE /* GUCLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUCLayer.m; sourceTree = "<group>"; };
 		ADE09CE0195744D500EDA814 /* Creative Hub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Creative Hub.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADE09CE3195744D500EDA814 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		ADE09CE5195744D500EDA814 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -50,8 +70,8 @@
 		ADE09CED195744D500EDA814 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		ADE09CEF195744D500EDA814 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ADE09CF1195744D500EDA814 /* Creative Hub-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Creative Hub-Prefix.pch"; sourceTree = "<group>"; };
-		ADE09CF2195744D500EDA814 /* GCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GCAppDelegate.h; sourceTree = "<group>"; };
-		ADE09CF3195744D500EDA814 /* GCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GCAppDelegate.m; sourceTree = "<group>"; };
+		ADE09CF2195744D500EDA814 /* GUCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GUCAppDelegate.h; sourceTree = "<group>"; };
+		ADE09CF3195744D500EDA814 /* GUCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GUCAppDelegate.m; sourceTree = "<group>"; };
 		ADE09CF6195744D500EDA814 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ADE09CFB195744D500EDA814 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		ADE09D01195744D500EDA814 /* Creative HubTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Creative HubTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,10 +79,10 @@
 		ADE09D0A195744D500EDA814 /* Creative HubTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Creative HubTests-Info.plist"; sourceTree = "<group>"; };
 		ADE09D0C195744D500EDA814 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		ADE09D0E195744D500EDA814 /* Creative_HubTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Creative_HubTests.m; sourceTree = "<group>"; };
-		ADE09D1B19574CC000EDA814 /* GCAlbumVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCAlbumVC.h; sourceTree = "<group>"; };
-		ADE09D1C19574CC000EDA814 /* GCAlbumVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCAlbumVC.m; sourceTree = "<group>"; };
-		ADE09D1E19575DF700EDA814 /* GCWebFetcherVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCWebFetcherVC.h; sourceTree = "<group>"; };
-		ADE09D1F19575DF700EDA814 /* GCWebFetcherVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCWebFetcherVC.m; sourceTree = "<group>"; };
+		ADE09D1B19574CC000EDA814 /* GUCAlbumVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUCAlbumVC.h; sourceTree = "<group>"; };
+		ADE09D1C19574CC000EDA814 /* GUCAlbumVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUCAlbumVC.m; sourceTree = "<group>"; };
+		ADE09D1E19575DF700EDA814 /* GUCWebFetcherVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUCWebFetcherVC.h; sourceTree = "<group>"; };
+		ADE09D1F19575DF700EDA814 /* GUCWebFetcherVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUCWebFetcherVC.m; sourceTree = "<group>"; };
 		ADE09D2F1957661F00EDA814 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		C55A1ACEF2EF4E68A16EB308 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -92,13 +112,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AD6AFA58195F2CCF0064090E /* Sketching */ = {
+			isa = PBXGroup;
+			children = (
+				AD6AFA55195F2CB80064090E /* GUCSketchingVC.h */,
+				AD6AFA56195F2CB80064090E /* GUCSketchingVC.m */,
+				ADA38F281961C6B2000420EE /* GUCLayersVC.h */,
+				ADA38F291961C6B2000420EE /* GUCLayersVC.m */,
+			);
+			name = Sketching;
+			sourceTree = "<group>";
+		};
+		AD6AFA59195F2EA90064090E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AD6AFA5A195F49E60064090E /* GUCSketchingView.h */,
+				AD6AFA5B195F49E60064090E /* GUCSketchingView.m */,
+				ADA38F251961C679000420EE /* GUCLayerCell.h */,
+				ADA38F261961C679000420EE /* GUCLayerCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		AD6AFA5D195F50CE0064090E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AD6AFA68195F52270064090E /* GUCSketchingTools.h */,
+				AD6AFA69195F52270064090E /* GUCSketchingTools.m */,
+				ADA38F2B1961C975000420EE /* GUCLayer.h */,
+				ADA38F2C1961C975000420EE /* GUCLayer.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		AD7624B2195865210044366D /* Web Image Retrieve */ = {
 			isa = PBXGroup;
 			children = (
-				ADE09D1E19575DF700EDA814 /* GCWebFetcherVC.h */,
-				ADE09D1F19575DF700EDA814 /* GCWebFetcherVC.m */,
-				AD7624AF195865140044366D /* GCWebImagesIndexVC.h */,
-				AD7624B0195865140044366D /* GCWebImagesIndexVC.m */,
+				ADE09D1E19575DF700EDA814 /* GUCWebFetcherVC.h */,
+				ADE09D1F19575DF700EDA814 /* GUCWebFetcherVC.m */,
+				AD7624AF195865140044366D /* GUCWebImagesIndexVC.h */,
+				AD7624B0195865140044366D /* GUCWebImagesIndexVC.m */,
 			);
 			name = "Web Image Retrieve";
 			sourceTree = "<group>";
@@ -106,8 +159,9 @@
 		ADDD921719576FB0000B1C0F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				ADE09D1B19574CC000EDA814 /* GCAlbumVC.h */,
-				ADE09D1C19574CC000EDA814 /* GCAlbumVC.m */,
+				ADE09D1B19574CC000EDA814 /* GUCAlbumVC.h */,
+				ADE09D1C19574CC000EDA814 /* GUCAlbumVC.m */,
+				AD6AFA58195F2CCF0064090E /* Sketching */,
 				AD7624B2195865210044366D /* Web Image Retrieve */,
 			);
 			name = Controllers;
@@ -150,11 +204,13 @@
 		ADE09CE9195744D500EDA814 /* Creative Hub */ = {
 			isa = PBXGroup;
 			children = (
-				ADE09CF2195744D500EDA814 /* GCAppDelegate.h */,
-				ADE09CF3195744D500EDA814 /* GCAppDelegate.m */,
+				ADE09CF2195744D500EDA814 /* GUCAppDelegate.h */,
+				ADE09CF3195744D500EDA814 /* GUCAppDelegate.m */,
 				ADE09CF5195744D500EDA814 /* Main.storyboard */,
 				ADE09CFB195744D500EDA814 /* Images.xcassets */,
+				AD6AFA5D195F50CE0064090E /* Models */,
 				ADDD921719576FB0000B1C0F /* Controllers */,
+				AD6AFA59195F2EA90064090E /* Views */,
 				ADE09CEA195744D500EDA814 /* Supporting Files */,
 			);
 			path = "Creative Hub";
@@ -163,6 +219,7 @@
 		ADE09CEA195744D500EDA814 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AD2270F6195C50A9002B179A /* STFU_UIAccessibilityLoader.m */,
 				ADE09CEB195744D500EDA814 /* Creative Hub-Info.plist */,
 				ADE09CEC195744D500EDA814 /* InfoPlist.strings */,
 				ADE09CEF195744D500EDA814 /* main.m */,
@@ -326,11 +383,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD7624B1195865140044366D /* GCWebImagesIndexVC.m in Sources */,
-				ADE09D1D19574CC000EDA814 /* GCAlbumVC.m in Sources */,
-				ADE09D2019575DF700EDA814 /* GCWebFetcherVC.m in Sources */,
-				ADE09CF4195744D500EDA814 /* GCAppDelegate.m in Sources */,
+				AD7624B1195865140044366D /* GUCWebImagesIndexVC.m in Sources */,
+				ADA38F2D1961C975000420EE /* GUCLayer.m in Sources */,
+				AD6AFA5C195F49E60064090E /* GUCSketchingView.m in Sources */,
+				ADE09D1D19574CC000EDA814 /* GUCAlbumVC.m in Sources */,
+				AD6AFA57195F2CB80064090E /* GUCSketchingVC.m in Sources */,
+				ADE09D2019575DF700EDA814 /* GUCWebFetcherVC.m in Sources */,
+				AD6AFA6A195F52270064090E /* GUCSketchingTools.m in Sources */,
+				AD2270F7195C50A9002B179A /* STFU_UIAccessibilityLoader.m in Sources */,
+				ADA38F2A1961C6B2000420EE /* GUCLayersVC.m in Sources */,
+				ADE09CF4195744D500EDA814 /* GUCAppDelegate.m in Sources */,
 				ADE09CF0195744D500EDA814 /* main.m in Sources */,
+				ADA38F271961C679000420EE /* GUCLayerCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

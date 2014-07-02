@@ -6,11 +6,11 @@
 //  Copyright (c) 2014年 Chao Gu. All rights reserved.
 //
 
-#import "GCWebFetcherVC.h"
-#import "GCWebImagesIndexVC.h"
+#import "GUCWebFetcherVC.h"
+#import "GUCWebImagesIndexVC.h"
 #import <HTMLReader/HTMLReader.h>
 
-@interface GCWebFetcherVC ()
+@interface GUCWebFetcherVC ()
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet UITextField *urlTextField;
@@ -18,7 +18,7 @@
 
 @end
 
-@implementation GCWebFetcherVC
+@implementation GUCWebFetcherVC
 
 - (void)viewDidLoad
 {
@@ -40,7 +40,7 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"WebFetcherToWebImagesIndex"]) {
-        GCWebImagesIndexVC *webImagesIndexVC = (GCWebImagesIndexVC *)[segue destinationViewController];
+        GUCWebImagesIndexVC *webImagesIndexVC = (GUCWebImagesIndexVC *)[segue destinationViewController];
         webImagesIndexVC.imageAddresses = [NSArray arrayWithArray:self.imageAddresses];
         [self.activityIndicator stopAnimating];
     }
@@ -58,6 +58,11 @@
 
 #pragma mark - IBAction
 
+/**
+ *  Retrieving images from the url provided, push a collection view to display the images
+ *
+ *  @param sender
+ */
 - (IBAction)searchWeb:(UIButton *)sender
 {
     [self.urlTextField resignFirstResponder];
@@ -67,12 +72,13 @@
     
     NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+//    NSLog(@"🔹task starting...");
     [[session dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (error) {
             NSLog(@"🔹Error: %@", error);
             NSLog(@"🔹User Info: %@", [error userInfo]);
         } else {
-            NSString *html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *html = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
             
             HTMLDocument *document = [HTMLDocument documentWithString:html];
             
@@ -100,6 +106,7 @@
                 }
 
             }
+            NSLog(@"🔹finished traversing");
             
             [self performSegueWithIdentifier:@"WebFetcherToWebImagesIndex" sender:nil];
 
@@ -130,6 +137,7 @@
 //            }
         }
     }] resume];
+//    NSLog(@"🔹task started");
 }
 
 @end

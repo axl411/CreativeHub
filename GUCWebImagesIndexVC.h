@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GCWebImagesIndexVC : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface GUCWebImagesIndexVC : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (nonatomic) NSArray *imageAddresses;
 

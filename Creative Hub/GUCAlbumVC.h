@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GCAlbumVC : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface GUCAlbumVC : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @end

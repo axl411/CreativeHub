@@ -6,13 +6,13 @@
 //  Copyright (c) 2014年 Chao Gu. All rights reserved.
 //
 
-#import "GCAlbumVC.h"
+#import "GUCAlbumVC.h"
 
-@interface GCAlbumVC ()
+@interface GUCAlbumVC ()
 
 @end
 
-@implementation GCAlbumVC
+@implementation GUCAlbumVC
 {
     NSMutableArray *array;
 }

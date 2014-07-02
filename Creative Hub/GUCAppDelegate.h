@@ -1,5 +1,5 @@
 //
-//  GCWebFetcherVC.h
+//  GCAppDelegate.h
 //  Creative Hub
 //
 //  Created by 顾超 on 14-6-22.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GCWebFetcherVC : UIViewController
+@interface GUCAppDelegate : UIResponder <UIApplicationDelegate>
+
+@property (strong, nonatomic) UIWindow *window;
 
 @end

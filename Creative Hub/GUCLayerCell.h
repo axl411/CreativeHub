@@ -1,0 +1,16 @@
+//
+//  GUCLayerCell.h
+//  Creative Hub
+//
+//  Created by 顾超 on 14-6-30.
+//  Copyright (c) 2014年 Chao Gu. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface GUCLayerCell : UITableViewCell
+
+@property (weak, nonatomic) IBOutlet UIImageView *layerImageView;
+@property (weak, nonatomic) IBOutlet UILabel *layerNameLabel;
+
+@end

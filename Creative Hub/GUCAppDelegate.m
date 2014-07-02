@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 Chao Gu. All rights reserved.
 //
 
-#import "GCAppDelegate.h"
+#import "GUCAppDelegate.h"
 
-@implementation GCAppDelegate
+@implementation GUCAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

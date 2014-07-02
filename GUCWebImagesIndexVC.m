@@ -6,14 +6,14 @@
 //  Copyright (c) 2014年 Chao Gu. All rights reserved.
 //
 
-#import "GCWebImagesIndexVC.h"
+#import "GUCWebImagesIndexVC.h"
 #import <SAMCache/SAMCache.h>
 
-@interface GCWebImagesIndexVC ()
+@interface GUCWebImagesIndexVC ()
 
 @end
 
-@implementation GCWebImagesIndexVC
+@implementation GUCWebImagesIndexVC
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
