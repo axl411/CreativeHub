@@ -9,7 +9,7 @@
 #import "GUCSketchingView.h"
 #import "GUCSketchingTools.h"
 
-#import <QuartzCore/QuartzCore.h>
+@import QuartzCore;
 
 #define kDefaultLineColor [UIColor blackColor]
 #define kDefaultLineWidth 5.0f;

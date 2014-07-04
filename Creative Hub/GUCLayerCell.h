@@ -6,11 +6,11 @@
 //  Copyright (c) 2014年 Chao Gu. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface GUCLayerCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *layerImageView;
-@property (weak, nonatomic) IBOutlet UILabel *layerNameLabel;
+@property(weak, nonatomic) IBOutlet UIImageView *layerImageView;
+@property(weak, nonatomic) IBOutlet UILabel *layerNameLabel;
 
 @end

@@ -10,7 +10,7 @@
 
 @implementation GUCLayer
 
-- (id)initWithImage:(UIImage *)image tag:(NSInteger)tag {
+- (instancetype)initWithImage:(UIImage *)image tag:(NSInteger)tag {
   self = [super init];
   if (self) {
     _image = image;

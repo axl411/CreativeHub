@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD09436F1967230B00CAB095 /* GUCWebImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD09436E1967230B00CAB095 /* GUCWebImageCell.m */; };
 		AD2270F7195C50A9002B179A /* STFU_UIAccessibilityLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = AD2270F6195C50A9002B179A /* STFU_UIAccessibilityLoader.m */; };
 		AD6AFA57195F2CB80064090E /* GUCSketchingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AD6AFA56195F2CB80064090E /* GUCSketchingVC.m */; };
 		AD6AFA5C195F49E60064090E /* GUCSketchingView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD6AFA5B195F49E60064090E /* GUCSketchingView.m */; };
@@ -30,7 +31,6 @@
 		ADE09D0D195744D500EDA814 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ADE09D0B195744D500EDA814 /* InfoPlist.strings */; };
 		ADE09D0F195744D500EDA814 /* Creative_HubTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE09D0E195744D500EDA814 /* Creative_HubTests.m */; };
 		ADE09D1D19574CC000EDA814 /* GUCAlbumVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE09D1C19574CC000EDA814 /* GUCAlbumVC.m */; };
-		ADE09D2019575DF700EDA814 /* GUCWebFetcherVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE09D1F19575DF700EDA814 /* GUCWebFetcherVC.m */; };
 		D2B70BC6F2254A91BCAA578F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D77226D6E0E4696B7802206 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +46,8 @@
 
 /* Begin PBXFileReference section */
 		1D77226D6E0E4696B7802206 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD09436D1967230B00CAB095 /* GUCWebImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUCWebImageCell.h; sourceTree = "<group>"; };
+		AD09436E1967230B00CAB095 /* GUCWebImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUCWebImageCell.m; sourceTree = "<group>"; };
 		AD2270F6195C50A9002B179A /* STFU_UIAccessibilityLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFU_UIAccessibilityLoader.m; sourceTree = "<group>"; };
 		AD6AFA55195F2CB80064090E /* GUCSketchingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUCSketchingVC.h; sourceTree = "<group>"; };
 		AD6AFA56195F2CB80064090E /* GUCSketchingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUCSketchingVC.m; sourceTree = "<group>"; };
@@ -81,8 +83,6 @@
 		ADE09D0E195744D500EDA814 /* Creative_HubTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Creative_HubTests.m; sourceTree = "<group>"; };
 		ADE09D1B19574CC000EDA814 /* GUCAlbumVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUCAlbumVC.h; sourceTree = "<group>"; };
 		ADE09D1C19574CC000EDA814 /* GUCAlbumVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUCAlbumVC.m; sourceTree = "<group>"; };
-		ADE09D1E19575DF700EDA814 /* GUCWebFetcherVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUCWebFetcherVC.h; sourceTree = "<group>"; };
-		ADE09D1F19575DF700EDA814 /* GUCWebFetcherVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUCWebFetcherVC.m; sourceTree = "<group>"; };
 		ADE09D2F1957661F00EDA814 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		C55A1ACEF2EF4E68A16EB308 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -112,6 +112,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AD09436B196722D700CAB095 /* Sketching */ = {
+			isa = PBXGroup;
+			children = (
+				AD6AFA5A195F49E60064090E /* GUCSketchingView.h */,
+				AD6AFA5B195F49E60064090E /* GUCSketchingView.m */,
+				ADA38F251961C679000420EE /* GUCLayerCell.h */,
+				ADA38F261961C679000420EE /* GUCLayerCell.m */,
+			);
+			name = Sketching;
+			sourceTree = "<group>";
+		};
+		AD09436C196722E200CAB095 /* Web Image Retrieve */ = {
+			isa = PBXGroup;
+			children = (
+				AD09436D1967230B00CAB095 /* GUCWebImageCell.h */,
+				AD09436E1967230B00CAB095 /* GUCWebImageCell.m */,
+			);
+			name = "Web Image Retrieve";
+			sourceTree = "<group>";
+		};
 		AD6AFA58195F2CCF0064090E /* Sketching */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,10 +146,8 @@
 		AD6AFA59195F2EA90064090E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				AD6AFA5A195F49E60064090E /* GUCSketchingView.h */,
-				AD6AFA5B195F49E60064090E /* GUCSketchingView.m */,
-				ADA38F251961C679000420EE /* GUCLayerCell.h */,
-				ADA38F261961C679000420EE /* GUCLayerCell.m */,
+				AD09436C196722E200CAB095 /* Web Image Retrieve */,
+				AD09436B196722D700CAB095 /* Sketching */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -148,8 +166,6 @@
 		AD7624B2195865210044366D /* Web Image Retrieve */ = {
 			isa = PBXGroup;
 			children = (
-				ADE09D1E19575DF700EDA814 /* GUCWebFetcherVC.h */,
-				ADE09D1F19575DF700EDA814 /* GUCWebFetcherVC.m */,
 				AD7624AF195865140044366D /* GUCWebImagesIndexVC.h */,
 				AD7624B0195865140044366D /* GUCWebImagesIndexVC.m */,
 			);
@@ -387,8 +403,8 @@
 				ADA38F2D1961C975000420EE /* GUCLayer.m in Sources */,
 				AD6AFA5C195F49E60064090E /* GUCSketchingView.m in Sources */,
 				ADE09D1D19574CC000EDA814 /* GUCAlbumVC.m in Sources */,
+				AD09436F1967230B00CAB095 /* GUCWebImageCell.m in Sources */,
 				AD6AFA57195F2CB80064090E /* GUCSketchingVC.m in Sources */,
-				ADE09D2019575DF700EDA814 /* GUCWebFetcherVC.m in Sources */,
 				AD6AFA6A195F52270064090E /* GUCSketchingTools.m in Sources */,
 				AD2270F7195C50A9002B179A /* STFU_UIAccessibilityLoader.m in Sources */,
 				ADA38F2A1961C6B2000420EE /* GUCLayersVC.m in Sources */,
@@ -480,7 +496,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -516,7 +532,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

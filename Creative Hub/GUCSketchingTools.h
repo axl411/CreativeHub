@@ -6,10 +6,9 @@
 //  Copyright (c) 2014年 Chao Gu. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @protocol GUCSketchingTool <NSObject>
-
 @property(nonatomic) UIColor *lineColor;
 @property(nonatomic) CGFloat lineAlpha;
 @property(nonatomic) CGFloat lineWidth;
@@ -22,7 +21,5 @@
 @end
 
 #pragma mark -
-
 @interface GUCSketchingPenTool : UIBezierPath <GUCSketchingTool>
-
 @end

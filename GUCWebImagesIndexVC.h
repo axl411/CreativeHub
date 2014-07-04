@@ -6,10 +6,10 @@
 //  Copyright (c) 2014年 Chao Gu. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
-@interface GUCWebImagesIndexVC : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface GUCWebImagesIndexVC : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate>
 
-@property (nonatomic) NSArray *imageAddresses;
+@property (nonatomic) NSMutableArray *imageAddresses;
 
 @end

@@ -96,13 +96,14 @@
 - (void)layersVCDidPressCanvasButton:(GUCLayersVC *)layersVC {
   [self dismissViewControllerAnimated:YES completion:nil];
   [self updateButtonStatus];
-  NSLog(@"🔹current activated tag: %d", self.currentActivatedSketchingViewTag);
+  NSLog(@"🔹current activated tag: %d",
+        (int)self.currentActivatedSketchingViewTag);
 }
 
 - (void)layersVC:(GUCLayersVC *)layersVC
     didChangeActivateLayer:(GUCLayer *)layer {
   self.currentActivatedSketchingViewTag = layer.tag;
-  NSLog(@"🔹Activated sketching view tag changed to %d", layer.tag);
+  NSLog(@"🔹Activated sketching view tag changed to %d", (int)layer.tag);
   for (GUCSketchingView *sketchingView in self.sketchingViews) {
     if (sketchingView.tag != self.currentActivatedSketchingViewTag) {
       sketchingView.userInteractionEnabled = NO;
@@ -125,7 +126,7 @@
   newSketchingView.userInteractionEnabled = NO;
   [self.view addSubview:newSketchingView];
   [self.sketchingViews insertObject:newSketchingView atIndex:0];
-    
+
   [self refreshLayerContents];
   layersVC.layers = self.layers;
 }

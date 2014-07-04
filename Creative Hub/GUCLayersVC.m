@@ -28,10 +28,6 @@
   // bar for this view controller.
   // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
-  self.tableView.delegate = self;
-  self.tableView.dataSource = self;
-  self.tableView.allowsMultipleSelectionDuringEditing = NO;
-
   NSInteger selectedRowNumber = [self initiallySelectedRowNumber];
   [self.tableView
       selectRowAtIndexPath:[NSIndexPath indexPathForRow:selectedRowNumber
@@ -111,9 +107,6 @@
         (int)(biggestTagNumber));
   [self.delegate layersVC:self
       didPressAddLayerButtonWithCurrentBiggestTagNumber:biggestTagNumber];
-//  [self.layers
-//      insertObject:[[GUCLayer alloc] initWithImage:nil tag:biggestTagNumber + 1]
-//           atIndex:0];
   NSLog(@"🔹Start inserting a new row at row 0");
   [self.tableView beginUpdates];
   [self.tableView
@@ -127,12 +120,6 @@
 }
 
 #pragma mark - Helper
-
-//- (NSIndexPath *)indexPathForAddingNewRow {
-//  NSIndexPath *indexPath =
-//      [NSIndexPath indexPathForRow:[self.layers count] - 2 inSection:0];
-//  return indexPath;
-//}
 
 /**
  *  Return the biggest tag number of layers (actually Sketching Views), so can

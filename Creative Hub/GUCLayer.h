@@ -6,13 +6,13 @@
 //  Copyright (c) 2014年 Chao Gu. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @interface GUCLayer : NSObject
 
 @property(nonatomic) UIImage *image;
 @property(nonatomic) NSInteger tag;
 
-- (id)initWithImage:(UIImage *)image tag:(NSInteger)tag;
+- (instancetype)initWithImage:(UIImage *)image tag:(NSInteger)tag;
 
 @end

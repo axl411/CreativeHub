@@ -6,8 +6,8 @@
 //  Copyright (c) 2014年 Chao Gu. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
-@interface GUCAlbumVC : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
-
+@interface GUCAlbumVC
+    : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
 @end
