@@ -11,6 +11,5 @@
 @interface GUCLayerCell : UITableViewCell
 
 @property(weak, nonatomic) IBOutlet UIImageView *layerImageView;
-@property(weak, nonatomic) IBOutlet UILabel *layerNameLabel;
 
 @end

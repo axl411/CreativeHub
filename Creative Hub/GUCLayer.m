@@ -10,11 +10,14 @@
 
 @implementation GUCLayer
 
-- (instancetype)initWithImage:(UIImage *)image tag:(NSInteger)tag {
+- (instancetype)initWithImage:(UIImage *)image
+                          tag:(NSInteger)tag
+                        alpha:(CGFloat)alpha {
   self = [super init];
   if (self) {
     _image = image;
     _tag = tag;
+    _alpha = alpha;
   }
   return self;
 }

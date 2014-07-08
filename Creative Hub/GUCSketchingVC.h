@@ -10,6 +10,12 @@
 
 @class GUCSketchingView;
 
+typedef enum {
+  GUCSketchingVCStatusDrawing = 1,
+  GUCSketchingVCStatusPlacingImage = 2,
+  GUCSketchingVCStatusPlacingSketchingView = 3
+} GUCSketchingVCStatus;
+
 @interface GUCSketchingVC : UIViewController
 
 @end

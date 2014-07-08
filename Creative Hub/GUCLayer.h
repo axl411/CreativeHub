@@ -12,7 +12,10 @@
 
 @property(nonatomic) UIImage *image;
 @property(nonatomic) NSInteger tag;
+@property(nonatomic) CGFloat alpha;
 
-- (instancetype)initWithImage:(UIImage *)image tag:(NSInteger)tag;
+- (instancetype)initWithImage:(UIImage *)image
+                          tag:(NSInteger)tag
+                        alpha:(CGFloat)alpha;
 
 @end

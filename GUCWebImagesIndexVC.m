@@ -161,7 +161,17 @@ preparation before navigation
   UIImage *image = [[SAMCache sharedCache]
       imageForKey:[self.imageAddresses objectAtIndex:indexPath.row]];
   NSLog(@"🔹image: %@", image);
-  NSLog(@"🔹url: %@", [self.imageAddresses objectAtIndex:indexPath.row]);
+  if (image) {
+    [self.delegate webImagesIndexVC:self didSelectCellWithImage:image];
+  } else {
+    UIAlertView *alertView = [[UIAlertView alloc]
+            initWithTitle:@"Error"
+                  message:@"Error when retrieving image, please try again!"
+                 delegate:nil
+        cancelButtonTitle:@"OK"
+        otherButtonTitles:nil];
+    [alertView show];
+  }
 }
 
 #pragma mark - UISearchBarDelegate

@@ -8,8 +8,20 @@
 
 @import UIKit;
 
-@interface GUCWebImagesIndexVC : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate>
+@class GUCWebImagesIndexVC;
 
-@property (nonatomic) NSMutableArray *imageAddresses;
+@protocol GUCWebImagesIndexVCDelegate <NSObject>
+
+- (void)webImagesIndexVC:(GUCWebImagesIndexVC *)webImagesIndexVC
+    didSelectCellWithImage:(UIImage *)image;
+
+@end
+
+@interface GUCWebImagesIndexVC
+    : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource,
+                        UISearchBarDelegate>
+
+@property(nonatomic) NSMutableArray *imageAddresses;
+@property(nonatomic, weak) id<GUCWebImagesIndexVCDelegate> delegate;
 
 @end

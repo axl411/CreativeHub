@@ -23,7 +23,7 @@ typedef enum {
 @interface GUCSketchingView : UIView
 
 @property(nonatomic) GUCSketchingToolType drawTool;
-@property(nonatomic) id<GUCSketchingViewDelegate> delegate;
+@property(nonatomic, weak) id<GUCSketchingViewDelegate> delegate;
 /** Image that caches the drawing on the Sketching View */
 @property(nonatomic) UIImage *image;
 /** Current line color */
