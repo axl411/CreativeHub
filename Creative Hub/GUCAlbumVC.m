@@ -7,42 +7,57 @@
 //
 
 #import "GUCAlbumVC.h"
+#import "GUCCoreDataStack.h"
+#import "GUCSketchingView.h"
+#import "GUCSketchSave.h"
+#import "GUCSketchSaveDetail.h"
+#import "GUCCollectionViewDataSource.h"
+#import "GUCAlbumCell.h"
 
 @interface GUCAlbumVC ()
+
+@property(nonatomic) NSArray *sketchingSaves;
+@property(nonatomic) GUCCollectionViewDataSource *sketchSaveDataSource;
+@property(weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
 
 @implementation GUCAlbumVC
-{
-    NSMutableArray *array;
+
+- (void)viewDidLoad {
+  [super viewDidLoad];
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    array = [[NSMutableArray alloc] init];
-    
-    [array addObject:@"Hello"];
-    [array addObject:@"Nice"];
-    [array addObject:@"EMM"];
-    [array addObject:@"help"];
-    [array addObject:@"that"];
-    [array addObject:@"dude"];
-    [array addObject:@"Stan"];
-    [array addObject:@"Kyle"];
+- (void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
+
+  [self loadSketchingSaves];
+
+  [self setUpCollectionView];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)didReceiveMemoryWarning {
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
+}
+
+- (void)setUpCollectionView {
+  CollectionViewCellConfigureBlock configureCell =
+      ^(GUCAlbumCell *cell, GUCSketchSave *save) {
+      cell.imageView.image = [UIImage imageWithData:save.image];
+  };
+  self.sketchSaveDataSource =
+      [[GUCCollectionViewDataSource alloc] initWithItems:self.sketchingSaves
+                                          cellIdentifier:@"AblumCell"
+                                      configureCellBlock:configureCell];
+  self.collectionView.dataSource = self.sketchSaveDataSource;
 }
 
 /*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+// In a storyboard-based application, you will often want to do a little
+preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     // Get the new view controller using [segue destinationViewController].
@@ -50,28 +65,30 @@
 }
 */
 
-#pragma mark - UICollectionViewDataSource
+#pragma mark - UICollectionViewDelegate
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-{
-    return 1;
+- (void)collectionView:(UICollectionView *)collectionView
+    didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+  GUCSketchSave *save = [self.sketchSaveDataSource itemAtIndexPath:indexPath];
+  NSSet *details = save.details;
+  for (GUCSketchSaveDetail *detail in details) {
+    NSLog(@"🔹%@", detail.viewTag);
+  }
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    return [array count];
-}
+#pragma mark - Helper
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"AblumCell" forIndexPath:indexPath];
-    
-    UILabel *label = (UILabel *)[cell viewWithTag:100];
-    label.text = [array objectAtIndex:indexPath.row];
-    [cell.layer setBorderWidth:2.0f];
-    [cell.layer setBorderColor:[UIColor whiteColor].CGColor];
-    
-    return cell;
+- (void)loadSketchingSaves {
+  GUCCoreDataStack *coreDataStack = [GUCCoreDataStack defaultStack];
+  NSManagedObjectContext *context = coreDataStack.managedObjectContext;
+
+  NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+  NSEntityDescription *entity =
+      [NSEntityDescription entityForName:@"GUCSketchSave"
+                  inManagedObjectContext:context];
+  [fetchRequest setEntity:entity];
+  NSError *error;
+  self.sketchingSaves = [context executeFetchRequest:fetchRequest error:&error];
 }
 
 @end

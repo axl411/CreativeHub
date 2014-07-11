@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13D65" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="GUCSketchSave" representedClassName="GUCSketchSave" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <relationship name="details" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="GUCSketchSaveDetail" inverseName="save" inverseEntity="GUCSketchSaveDetail" syncable="YES"/>
+    </entity>
+    <entity name="GUCSketchSaveDetail" representedClassName="GUCSketchSaveDetail" syncable="YES">
+        <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="viewTag" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="save" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GUCSketchSave" inverseName="details" inverseEntity="GUCSketchSave" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="GUCSketchSave" positionX="3760" positionY="-3015" width="128" height="88"/>
+        <element name="GUCSketchSaveDetail" positionX="4014" positionY="-2997" width="128" height="103"/>
+    </elements>
+</model>

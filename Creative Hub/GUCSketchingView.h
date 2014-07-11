@@ -33,6 +33,13 @@ typedef enum {
 /** Current line alpha value */
 @property(nonatomic) CGFloat lineAlpha;
 
+/** Stores an array of all drawn paths */
+@property(nonatomic) NSMutableArray *pathArray;
+/** Stores an array of un-done paths, which can then be re-done later */
+@property(nonatomic) NSMutableArray *bufferArray;
+/** current tool */
+@property(nonatomic) id<GUCSketchingTool> currentTool;
+
 /** Erase all drawings */
 - (void)clear;
 /** Undo */

@@ -17,13 +17,6 @@
 
 @interface GUCSketchingView ()
 
-/** current tool */
-@property(nonatomic) id<GUCSketchingTool> currentTool;
-/** Stores an array of all drawn paths */
-@property(nonatomic) NSMutableArray *pathArray;
-/** Stores an array of un-done paths, which can then be re-done later */
-@property(nonatomic) NSMutableArray *bufferArray;
-
 @end
 
 @implementation GUCSketchingView

@@ -13,7 +13,9 @@
 #import "GUCWebImagesIndexVC.h"
 #import "GUCColorPickerVC.h"
 #import "GUCAlbumVC.h"
-
+#import "GUCCoreDataStack.h"
+#import "GUCSketchSave.h"
+#import "GUCSketchSaveDetail.h"
 #import "DoActionSheet.h"
 
 #import <MobileCoreServices/UTCoreTypes.h>
@@ -64,6 +66,7 @@
  *  array, which is used to placing the view back if user chooses cancel when re
  *  position the view */
 @property(nonatomic) GUCSketchingView *sketchingViewBeingRePositioned;
+@property(nonatomic) GUCSketchSave *save;
 
 @end
 
@@ -215,8 +218,8 @@
 - (void)sketchingView:(GUCSketchingView *)view
     didEndDrawUsingTool:(id<GUCSketchingTool>)tool {
   [self updateButtonStatus];
-  NSLog(@"🔹updated button status for sketching view with tag %d",
-        (int)(view.tag));
+
+  [self saveSketch];
 }
 
 #pragma mark - GUCLayersVCDelegate
@@ -257,7 +260,10 @@
   [self.sketchingViews removeObject:sketchingView];
 
   [self refreshLayerContents];
+  [self reorderSketchingViewsBasedOnSketchingViewArrayOrder];
   layersVC.layers = self.layers;
+
+  [self saveSketch];
 }
 
 - (void)layersVC:(GUCLayersVC *)layersVC
@@ -701,7 +707,6 @@
 - (void)reorderSketchingViewsBasedOnSketchingViewArrayOrder {
   for (int i = self.sketchingViews.count - 1; i >= 0; i--) {
     [self.view bringSubviewToFront:self.sketchingViews[i]];
-    NSLog(@"🔹called, %d", i);
   }
 }
 
@@ -731,12 +736,11 @@
   [self embedImageInImageView:image];
 
   [self addRecognizers];
-  NSLog(@"🔹current sketching views number: %d", self.sketchingViews.count);
 }
 
 - (void)processForCancelPlacingImage {
-  [self.embedView removeFromSuperview];
   [self.imageView removeFromSuperview];
+  [self.embedView removeFromSuperview];
   //  self.imageView = nil;
 
   [self enableNormalButtonsAndRemoveButtonsForPlacingSelectedImage];
@@ -748,7 +752,6 @@
 
 - (void)changeActivatedSketchingViewWithTag:(NSInteger)tag {
   self.currentActivatedSketchingViewTag = tag;
-  NSLog(@"🔹Activated sketching view tag changed to %d", tag);
   for (GUCSketchingView *sketchingView in self.sketchingViews) {
     if (sketchingView.tag != self.currentActivatedSketchingViewTag) {
       sketchingView.userInteractionEnabled = NO;
@@ -757,6 +760,59 @@
     }
   }
   NSLog(@"🔹Did disable other sketching view receiving touch event");
+}
+
+/**
+ *  Save sketch information into Core Data
+ */
+- (void)saveSketch {
+  GUCCoreDataStack *coreDataStack = [GUCCoreDataStack defaultStack];
+  NSManagedObjectContext *context = coreDataStack.managedObjectContext;
+
+  if (self.save) {
+    [context deleteObject:self.save];
+  }
+
+  GUCSketchSave *save =
+      [NSEntityDescription insertNewObjectForEntityForName:@"GUCSketchSave"
+                                    inManagedObjectContext:context];
+  save.date = [NSDate date];
+  UIImage *image = [self imageCombinedWithAllSketchingViews];
+  save.image = UIImagePNGRepresentation(image);
+
+  for (GUCSketchingView *sketchingView in self.sketchingViews) {
+    GUCSketchSaveDetail *detail = [NSEntityDescription
+        insertNewObjectForEntityForName:@"GUCSketchSaveDetail"
+                 inManagedObjectContext:context];
+    NSData *imageData = UIImagePNGRepresentation(sketchingView.image);
+    detail.image = imageData;
+    detail.viewTag = [NSNumber numberWithInteger:sketchingView.tag];
+    NSNumber *index = [NSNumber
+        numberWithInteger:[self.sketchingViews indexOfObject:sketchingView]];
+    detail.index = index;
+    [save addDetailsObject:detail];
+  }
+
+  [coreDataStack saveContext];
+
+  self.save = save;
+}
+
+- (UIImage *)imageCombinedWithAllSketchingViews {
+  self.embedView = nil;
+  [self.view addSubview:self.embedView];
+  for (int i = self.sketchingViews.count - 1; i >= 0; i--) {
+    UIImageView *imageView = [[UIImageView alloc]
+        initWithFrame:CGRectMake(0.0, 0.0, self.embedView.frame.size.width,
+                                 self.embedView.frame.size.height)];
+    imageView.image = ((GUCSketchingView *)self.sketchingViews[i]).image;
+    [self.embedView addSubview:imageView];
+  }
+
+  UIImage *capturedImage = [self captureImageInView:self.embedView];
+  [self.embedView removeFromSuperview];
+  self.embedView = nil;
+  return capturedImage;
 }
 
 @end
