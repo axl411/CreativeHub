@@ -157,6 +157,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
   // put a view with white background color at the bottom of the hierarchy,
   // which is used to make the background of sketching view appears white
   self.backgroundView =
@@ -167,13 +168,21 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+  [super viewDidAppear:animated];
   // disable swipe to right to dismiss view
   self.navigationController.interactivePopGestureRecognizer.enabled = NO;
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
+  [super viewDidDisappear:animated];
   // enable swipe to right to dismiss view
   self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+  [super viewWillDisappear:animated];
+
+  [self saveSketch];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -37,6 +37,11 @@
     imageView.frame =
         CGRectMake(self.imageWidth * [self.imageViews indexOfObject:imageView],
                    0, self.imageWidth, self.imageWidth);
+    imageView.layer.borderColor = [[UIColor colorWithRed:209.0 / 255.0
+                                                   green:238.0 / 255.0
+                                                    blue:252.0 / 255.0
+                                                   alpha:1.0] CGColor];
+    imageView.layer.borderWidth = 1;
     [self addSubview:imageView];
   }
 
@@ -54,7 +59,6 @@
 
 - (void)tapDetected:(UITapGestureRecognizer *)tapGestureRecognizer {
   CGPoint location = [tapGestureRecognizer locationInView:self];
-  NSLog(@"🔹%@", NSStringFromCGPoint(location));
 
   NSUInteger selectedImageViewIndex =
       (NSUInteger)(location.x / self.bounds.size.height);
@@ -64,7 +68,10 @@
 - (void)selectImageViewAtIndex:(NSUInteger)index {
   for (UIImageView *imageView in self.imageViews) {
     if ([self.imageViews indexOfObject:imageView] == index) {
-      imageView.backgroundColor = [UIColor grayColor];
+      imageView.backgroundColor = [UIColor colorWithRed:220.0 / 255.0
+                                                  green:220.0 / 255.0
+                                                   blue:220.0 / 255.0
+                                                  alpha:1.0];
     } else {
       imageView.backgroundColor = [UIColor colorWithRed:247.0 / 255.0
                                                   green:247.0 / 255.0

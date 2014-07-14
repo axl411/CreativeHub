@@ -21,6 +21,7 @@
 @property(nonatomic) NSArray *animatingViews;
 @property(nonatomic) UIView *embedView;
 @property(weak, nonatomic) IBOutlet GUCLayersScrollView *layersScrollView;
+@property(nonatomic) NSInteger activatedAnimatingViewIndex;
 
 @end
 
@@ -50,6 +51,8 @@
   NSArray *imageViews = [self imageViewsWithSaveDetails:self.save.details];
   self.layersScrollView.imageViews = imageViews;
   [self.layersScrollView configSelf];
+  self.layersScrollView.layersScrollViewDelegate = self;
+  [self.layersScrollView selectImageViewAtIndex:0];
 }
 
 - (void)viewDidLoad {
@@ -80,10 +83,25 @@ preparation before navigation
 
 - (void)layersScrollView:(GUCLayersScrollView *)layersScrollView
     didSelectImageViewAtIndex:(NSUInteger)index {
-  // TODO: 处理选择了一副图层之后的事项
+  self.activatedAnimatingViewIndex = index;
+  [self highlightAnimatingViewWithIndex:index];
 }
 
 #pragma mark - Helper
+
+- (void)highlightAnimatingViewWithIndex:(NSInteger)index {
+  [self.animatingViews
+      enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+          GUCAnimatingView *animatingView = (GUCAnimatingView *)obj;
+          if (index == idx) {
+            [UIView animateWithDuration:0.5
+                             animations:^{ animatingView.alpha = 1.0; }];
+          } else {
+            [UIView animateWithDuration:0.5
+                             animations:^{ animatingView.alpha = 0.075; }];
+          }
+      }];
+}
 
 /**
  *  Create an array of GUCAnimatingView from the given GUCSketchSaveDetail set,

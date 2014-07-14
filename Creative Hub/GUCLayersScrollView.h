@@ -17,6 +17,7 @@
     id<GUCLayersScrollViewDelegate> layersScrollViewDelegate;
 
 - (void)configSelf;
+- (void)selectImageViewAtIndex:(NSUInteger)index;
 
 @end
 
