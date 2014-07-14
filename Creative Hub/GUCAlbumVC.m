@@ -13,12 +13,21 @@
 #import "GUCSketchSaveDetail.h"
 #import "GUCCollectionViewDataSource.h"
 #import "GUCAlbumCell.h"
+#import "GUCAnimatingVC.h"
+
+#define NavigationBarDeleteColor                                               \
+  [UIColor colorWithRed:1 green:0.231 blue:0.188 alpha:1]
+#define NavigationBarNormalColor                                               \
+  [UIColor colorWithRed:0.204 green:0.667 blue:0.863 alpha:1]
 
 @interface GUCAlbumVC ()
 
-@property(nonatomic) NSArray *sketchingSaves;
+@property(nonatomic) NSMutableArray *sketchingSaves;
 @property(nonatomic) GUCCollectionViewDataSource *sketchSaveDataSource;
 @property(weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property(weak, nonatomic) IBOutlet UIBarButtonItem *deleteButton;
+
+@property(nonatomic) BOOL isDeleteActive;
 
 @end
 
@@ -53,26 +62,80 @@
   self.collectionView.dataSource = self.sketchSaveDataSource;
 }
 
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little
-preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+  if ([segue.identifier isEqualToString:@"albumVCToAnimatingVC"]) {
+    GUCAnimatingVC *animatingVC =
+        (GUCAnimatingVC *)segue.destinationViewController;
+    GUCSketchSave *save = (GUCSketchSave *)sender;
+    animatingVC.save = save;
+  } else if ([segue.identifier isEqualToString:@"albumToSketchingVC"]) {
+    if (self.isDeleteActive) {
+      self.isDeleteActive = NO;
+      [self.navigationController.navigationBar
+          setBarTintColor:NavigationBarNormalColor];
+      [self.deleteButton setTitle:@"Delete"];
+      [self setTitle:@"Animation Album"];
+    }
+  }
 }
-*/
 
 #pragma mark - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView
     didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
   GUCSketchSave *save = [self.sketchSaveDataSource itemAtIndexPath:indexPath];
-  NSSet *details = save.details;
-  for (GUCSketchSaveDetail *detail in details) {
-    NSLog(@"🔹%@", detail.viewTag);
+  if (!self.isDeleteActive) {
+    [self performSegueWithIdentifier:@"albumVCToAnimatingVC" sender:save];
+  } else {
+    [self.sketchingSaves removeObject:save];
+    GUCCoreDataStack *coreDataStack = [GUCCoreDataStack defaultStack];
+    NSManagedObjectContext *context = coreDataStack.managedObjectContext;
+    [context deleteObject:save];
+    [coreDataStack saveContext];
+    [self.collectionView deleteItemsAtIndexPaths:@[ indexPath ]];
+  }
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView
+    shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
+  return YES;
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView
+      canPerformAction:(SEL)action
+    forItemAtIndexPath:(NSIndexPath *)indexPath
+            withSender:(id)sender {
+  // Support only deleting of cells.
+  if ([NSStringFromSelector(action) isEqualToString:@"delete:"])
+    return YES;
+
+  // Prevent all other actions.
+  return NO;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView
+         performAction:(SEL)action
+    forItemAtIndexPath:(NSIndexPath *)indexPath
+            withSender:(id)sender {
+}
+
+#pragma mark - Actions
+
+- (IBAction)deleteButtonPressed:(UIBarButtonItem *)sender {
+  if (self.isDeleteActive) {
+    self.isDeleteActive = NO;
+    [self.navigationController.navigationBar
+        setBarTintColor:NavigationBarNormalColor];
+    [sender setTitle:@"Delete"];
+    [self setTitle:@"Animation Album"];
+  } else {
+    self.isDeleteActive = YES;
+    [self.navigationController.navigationBar
+        setBarTintColor:NavigationBarDeleteColor];
+    [self setTitle:@"Tap to Delete..."];
+    [sender setTitle:@"Done"];
   }
 }
 
@@ -88,7 +151,8 @@ preparation before navigation
                   inManagedObjectContext:context];
   [fetchRequest setEntity:entity];
   NSError *error;
-  self.sketchingSaves = [context executeFetchRequest:fetchRequest error:&error];
+  self.sketchingSaves =
+      [[context executeFetchRequest:fetchRequest error:&error] mutableCopy];
 }
 
 @end

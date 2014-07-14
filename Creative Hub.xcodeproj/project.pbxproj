@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AD09436F1967230B00CAB095 /* GUCWebImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD09436E1967230B00CAB095 /* GUCWebImageCell.m */; };
 		AD2270F7195C50A9002B179A /* STFU_UIAccessibilityLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = AD2270F6195C50A9002B179A /* STFU_UIAccessibilityLoader.m */; };
+		AD64F5981972DCB500BB0E31 /* GUCLayersScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD64F5971972DCB500BB0E31 /* GUCLayersScrollView.m */; };
 		AD6AFA57195F2CB80064090E /* GUCSketchingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AD6AFA56195F2CB80064090E /* GUCSketchingVC.m */; };
 		AD6AFA5C195F49E60064090E /* GUCSketchingView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD6AFA5B195F49E60064090E /* GUCSketchingView.m */; };
 		AD6AFA6A195F52270064090E /* GUCSketchingTools.m in Sources */ = {isa = PBXBuildFile; fileRef = AD6AFA69195F52270064090E /* GUCSketchingTools.m */; };
@@ -26,6 +27,8 @@
 		ADA38F2A1961C6B2000420EE /* GUCLayersVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA38F291961C6B2000420EE /* GUCLayersVC.m */; };
 		ADA38F2D1961C975000420EE /* GUCLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA38F2C1961C975000420EE /* GUCLayer.m */; };
 		ADA40BCA196A0438005603F4 /* GUCColorPickerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA40BC9196A0438005603F4 /* GUCColorPickerVC.m */; };
+		ADDBB244197193440079BEA8 /* GUCAnimatingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDBB243197193440079BEA8 /* GUCAnimatingVC.m */; };
+		ADDBB24B1971C1FB0079BEA8 /* GUCAnimatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDBB24A1971C1FB0079BEA8 /* GUCAnimatingView.m */; };
 		ADE09CE4195744D500EDA814 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE09CE3195744D500EDA814 /* Foundation.framework */; };
 		ADE09CE6195744D500EDA814 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE09CE5195744D500EDA814 /* CoreGraphics.framework */; };
 		ADE09CE8195744D500EDA814 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE09CE7195744D500EDA814 /* UIKit.framework */; };
@@ -58,6 +61,8 @@
 		AD09436D1967230B00CAB095 /* GUCWebImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUCWebImageCell.h; sourceTree = "<group>"; };
 		AD09436E1967230B00CAB095 /* GUCWebImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUCWebImageCell.m; sourceTree = "<group>"; };
 		AD2270F6195C50A9002B179A /* STFU_UIAccessibilityLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFU_UIAccessibilityLoader.m; sourceTree = "<group>"; };
+		AD64F5961972DCB500BB0E31 /* GUCLayersScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUCLayersScrollView.h; sourceTree = "<group>"; };
+		AD64F5971972DCB500BB0E31 /* GUCLayersScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUCLayersScrollView.m; sourceTree = "<group>"; };
 		AD6AFA55195F2CB80064090E /* GUCSketchingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUCSketchingVC.h; sourceTree = "<group>"; };
 		AD6AFA56195F2CB80064090E /* GUCSketchingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUCSketchingVC.m; sourceTree = "<group>"; };
 		AD6AFA5A195F49E60064090E /* GUCSketchingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUCSketchingView.h; sourceTree = "<group>"; };
@@ -89,6 +94,10 @@
 		ADA38F2C1961C975000420EE /* GUCLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUCLayer.m; sourceTree = "<group>"; };
 		ADA40BC8196A0438005603F4 /* GUCColorPickerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUCColorPickerVC.h; sourceTree = "<group>"; };
 		ADA40BC9196A0438005603F4 /* GUCColorPickerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUCColorPickerVC.m; sourceTree = "<group>"; };
+		ADDBB242197193440079BEA8 /* GUCAnimatingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUCAnimatingVC.h; sourceTree = "<group>"; };
+		ADDBB243197193440079BEA8 /* GUCAnimatingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUCAnimatingVC.m; sourceTree = "<group>"; };
+		ADDBB2491971C1FB0079BEA8 /* GUCAnimatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUCAnimatingView.h; sourceTree = "<group>"; };
+		ADDBB24A1971C1FB0079BEA8 /* GUCAnimatingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUCAnimatingView.m; sourceTree = "<group>"; };
 		ADE09CE0195744D500EDA814 /* Creative Hub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Creative Hub.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADE09CE3195744D500EDA814 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		ADE09CE5195744D500EDA814 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -176,6 +185,7 @@
 			children = (
 				AD98E89019703E6B00DAFFB5 /* Album */,
 				AD09436C196722E200CAB095 /* Web Image Retrieve */,
+				ADDBB2451971B3760079BEA8 /* Animating */,
 				AD09436B196722D700CAB095 /* Sketching */,
 				AD98E80C196EF79A00DAFFB5 /* Helper */,
 			);
@@ -246,11 +256,32 @@
 			name = Album;
 			sourceTree = "<group>";
 		};
+		ADDBB241197193290079BEA8 /* Animating */ = {
+			isa = PBXGroup;
+			children = (
+				ADDBB242197193440079BEA8 /* GUCAnimatingVC.h */,
+				ADDBB243197193440079BEA8 /* GUCAnimatingVC.m */,
+			);
+			name = Animating;
+			sourceTree = "<group>";
+		};
+		ADDBB2451971B3760079BEA8 /* Animating */ = {
+			isa = PBXGroup;
+			children = (
+				ADDBB2491971C1FB0079BEA8 /* GUCAnimatingView.h */,
+				ADDBB24A1971C1FB0079BEA8 /* GUCAnimatingView.m */,
+				AD64F5961972DCB500BB0E31 /* GUCLayersScrollView.h */,
+				AD64F5971972DCB500BB0E31 /* GUCLayersScrollView.m */,
+			);
+			name = Animating;
+			sourceTree = "<group>";
+		};
 		ADDD921719576FB0000B1C0F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				AD98E88F19703E4500DAFFB5 /* Album */,
 				AD6AFA58195F2CCF0064090E /* Sketching */,
+				ADDBB241197193290079BEA8 /* Animating */,
 				AD7624B2195865210044366D /* Web Image Retrieve */,
 			);
 			name = Controllers;
@@ -485,10 +516,12 @@
 				AD98E83C196F0EA200DAFFB5 /* GUCSketchSave.m in Sources */,
 				ADA38F2D1961C975000420EE /* GUCLayer.m in Sources */,
 				AD6AFA5C195F49E60064090E /* GUCSketchingView.m in Sources */,
+				AD64F5981972DCB500BB0E31 /* GUCLayersScrollView.m in Sources */,
 				ADA40BCA196A0438005603F4 /* GUCColorPickerVC.m in Sources */,
 				AD98E89319703E8300DAFFB5 /* GUCAlbumCell.m in Sources */,
 				AD98E7B7196EEC3500DAFFB5 /* GUCCoreDataStack.m in Sources */,
 				AD98E7B4196EEB8500DAFFB5 /* Creative_Hub.xcdatamodeld in Sources */,
+				ADDBB244197193440079BEA8 /* GUCAnimatingVC.m in Sources */,
 				AD98E80F196EF7B300DAFFB5 /* GUCViewUtility.m in Sources */,
 				ADE09D1D19574CC000EDA814 /* GUCAlbumVC.m in Sources */,
 				AD09436F1967230B00CAB095 /* GUCWebImageCell.m in Sources */,
@@ -501,6 +534,7 @@
 				AD98E83F196F0EA200DAFFB5 /* GUCSketchSaveDetail.m in Sources */,
 				ADE09CF0195744D500EDA814 /* main.m in Sources */,
 				ADA38F271961C679000420EE /* GUCLayerCell.m in Sources */,
+				ADDBB24B1971C1FB0079BEA8 /* GUCAnimatingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

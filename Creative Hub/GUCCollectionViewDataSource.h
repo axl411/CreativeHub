@@ -10,11 +10,13 @@
 
 typedef void (^CollectionViewCellConfigureBlock)(id cell, id item);
 
-@interface GUCCollectionViewDataSource : NSObject <UICollectionViewDataSource>
+@interface GUCCollectionViewDataSource
+    : NSObject <UICollectionViewDataSource>
 
 - (instancetype)initWithItems:(NSArray *)anItems
-     cellIdentifier:(NSString *)aCellIdentifier
- configureCellBlock:(CollectionViewCellConfigureBlock)aConfigureCellBlock;
+               cellIdentifier:(NSString *)aCellIdentifier
+           configureCellBlock:
+               (CollectionViewCellConfigureBlock)aConfigureCellBlock;
 
 - (id)itemAtIndexPath:(NSIndexPath *)indexPath;
 

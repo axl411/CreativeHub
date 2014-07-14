@@ -357,14 +357,24 @@
 - (void)alertView:(UIAlertView *)alertView
     clickedButtonAtIndex:(NSInteger)buttonIndex {
   if (buttonIndex == 1) {
-    // TODO: save images of layers into core data
 
-    GUCAlbumVC *albumVC =
-        (GUCAlbumVC *)self.navigationController.viewControllers[0];
+    if (self.save) {
+      GUCAlbumVC *albumVC =
+          (GUCAlbumVC *)self.navigationController.viewControllers[0];
 
-    [self.navigationController popToRootViewControllerAnimated:NO];
+      [self.navigationController popToRootViewControllerAnimated:NO];
 
-    [albumVC performSegueWithIdentifier:@"albumVCToAnimatingVC" sender:nil];
+      [albumVC performSegueWithIdentifier:@"albumVCToAnimatingVC"
+                                   sender:self.save];
+    } else {
+      UIAlertView *alert =
+          [[UIAlertView alloc] initWithTitle:@"No drawing"
+                                     message:@"You havn't drawn anything!"
+                                    delegate:nil
+                           cancelButtonTitle:@"OK"
+                           otherButtonTitles:nil];
+      [alert show];
+    }
   }
 }
 
@@ -705,9 +715,15 @@
  *  in the sketching views array, this method does the job
  */
 - (void)reorderSketchingViewsBasedOnSketchingViewArrayOrder {
-  for (int i = self.sketchingViews.count - 1; i >= 0; i--) {
+  for (NSInteger i = self.sketchingViews.count - 1; i >= 0; i--) {
     [self.view bringSubviewToFront:self.sketchingViews[i]];
   }
+
+  // on 3.5 inch devices some controls need to be on top of the canvas
+  [self.view bringSubviewToFront:self.alphaSlider];
+  [self.view bringSubviewToFront:self.layersButton];
+  [self.view bringSubviewToFront:self.alphaButton];
+  [self.view bringSubviewToFront:self.addImageButton];
 }
 
 /**

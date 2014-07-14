@@ -8,6 +8,5 @@
 
 @import UIKit;
 
-@interface GUCAlbumVC
-    : UIViewController <UICollectionViewDelegate>
+@interface GUCAlbumVC : UIViewController <UICollectionViewDelegate>
 @end

@@ -10,6 +10,6 @@
 
 @interface GUCAlbumCell : UICollectionViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property(weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @end
