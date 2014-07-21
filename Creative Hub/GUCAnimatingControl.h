@@ -21,6 +21,8 @@
 @property(nonatomic, weak) id<GUCAnimatingControlDelegate> delegate;
 @property(nonatomic) NSMutableDictionary *timeSlots;
 @property(nonatomic) NSMutableArray *availableTimePieces;
+/** Stores all timeslots as an array, in ascending order */
+@property(nonatomic) NSMutableArray *sortedTimeSlots;
 
 - (instancetype)initWithTimeBarView:(GUCTimeBar *)timeBar
                       animatingView:(GUCAnimatingView *)animatingView

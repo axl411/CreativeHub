@@ -30,6 +30,7 @@
 		ADA38F2A1961C6B2000420EE /* GUCLayersVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA38F291961C6B2000420EE /* GUCLayersVC.m */; };
 		ADA38F2D1961C975000420EE /* GUCLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA38F2C1961C975000420EE /* GUCLayer.m */; };
 		ADA40BCA196A0438005603F4 /* GUCColorPickerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA40BC9196A0438005603F4 /* GUCColorPickerVC.m */; };
+		ADC02470197D62600062081E /* GUCShowAnimationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC0246F197D62600062081E /* GUCShowAnimationVC.m */; };
 		ADDBB244197193440079BEA8 /* GUCAnimatingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDBB243197193440079BEA8 /* GUCAnimatingVC.m */; };
 		ADE09CE4195744D500EDA814 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE09CE3195744D500EDA814 /* Foundation.framework */; };
 		ADE09CE6195744D500EDA814 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE09CE5195744D500EDA814 /* CoreGraphics.framework */; };
@@ -102,6 +103,8 @@
 		ADA38F2C1961C975000420EE /* GUCLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUCLayer.m; sourceTree = "<group>"; };
 		ADA40BC8196A0438005603F4 /* GUCColorPickerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUCColorPickerVC.h; sourceTree = "<group>"; };
 		ADA40BC9196A0438005603F4 /* GUCColorPickerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUCColorPickerVC.m; sourceTree = "<group>"; };
+		ADC0246E197D62600062081E /* GUCShowAnimationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUCShowAnimationVC.h; sourceTree = "<group>"; };
+		ADC0246F197D62600062081E /* GUCShowAnimationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUCShowAnimationVC.m; sourceTree = "<group>"; };
 		ADDBB242197193440079BEA8 /* GUCAnimatingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUCAnimatingVC.h; sourceTree = "<group>"; };
 		ADDBB243197193440079BEA8 /* GUCAnimatingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUCAnimatingVC.m; sourceTree = "<group>"; };
 		ADE09CE0195744D500EDA814 /* Creative Hub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Creative Hub.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -270,6 +273,8 @@
 				ADDBB243197193440079BEA8 /* GUCAnimatingVC.m */,
 				AD7FC79D19782CEB003FF330 /* GUCAnimatingControl.h */,
 				AD7FC79E19782CEB003FF330 /* GUCAnimatingControl.m */,
+				ADC0246E197D62600062081E /* GUCShowAnimationVC.h */,
+				ADC0246F197D62600062081E /* GUCShowAnimationVC.m */,
 			);
 			name = Animating;
 			sourceTree = "<group>";
@@ -524,6 +529,7 @@
 			files = (
 				AD7624B1195865140044366D /* GUCWebImagesIndexVC.m in Sources */,
 				AD1823C3197C1CF7001739FD /* GUCAnimatingView.m in Sources */,
+				ADC02470197D62600062081E /* GUCShowAnimationVC.m in Sources */,
 				AD98E83C196F0EA200DAFFB5 /* GUCSketchSave.m in Sources */,
 				AD5E3FCA1975A1DE000918E8 /* GUCTimeBar.m in Sources */,
 				ADA38F2D1961C975000420EE /* GUCLayer.m in Sources */,

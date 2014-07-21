@@ -27,6 +27,8 @@
 @property(nonatomic) NSMutableArray *animatingControls;
 @property(nonatomic) UIDynamicAnimator *animator;
 @property(weak, nonatomic) IBOutlet UIView *actionButtonsView;
+@property(nonatomic) UIBarButtonItem *playBarButton;
+@property(nonatomic) NSInteger steps;
 
 @end
 
@@ -67,6 +69,16 @@
   }
 
   return _embedView;
+}
+
+- (UIBarButtonItem *)playBarButton {
+  if (!_playBarButton) {
+    _playBarButton = [[UIBarButtonItem alloc]
+        initWithBarButtonSystemItem:UIBarButtonSystemItemPlay
+                             target:self
+                             action:@selector(playPressed)];
+  }
+  return _playBarButton;
 }
 
 #pragma mark -
@@ -112,6 +124,11 @@
   // index 0 of animating scroll view will always work
   self.activatedAnimatingViewIndex = -1;
   [self layersScrollView:self.layersScrollView didSelectImageViewAtIndex:0];
+
+  // add the playBarButton to navigation bar
+  self.navigationItem.rightBarButtonItem = self.playBarButton;
+
+  self.steps = 5;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -211,6 +228,10 @@ preparation before navigation
 
 - (IBAction)scalePressed:(UIButton *)sender {
   [[self activatedAnimatingControl] scalePressed];
+}
+
+- (void)playPressed {
+  NSURL *fileURL = [self generateGIF];
 }
 
 #pragma mark - GUCTimeBarDelegate
@@ -341,6 +362,88 @@ preparation before navigation
       animatingView.userInteractionEnabled = NO;
     }
   }
+}
+
+- (NSURL *)generateGIF {
+  NSArray *images = [self sequentialImagesOfAnimation];
+  return nil;
+}
+
+- (NSArray *)sequentialImagesOfAnimation {
+  NSMutableArray *images = [NSMutableArray array];
+
+  NSArray *allTransformations = [self allTransformations];
+  //  for (NSArray *transformations in allTransformations) {
+  //    NSLog(@"🔹%@", transformations);
+  //  }
+
+  return [NSArray arrayWithArray:images];
+}
+
+- (NSArray *)allTransformations {
+  NSMutableArray *allTransformations = [NSMutableArray array];
+
+  for (GUCAnimatingControl *animatingControl in self.animatingControls) {
+    NSArray *transformations =
+        [self transformationsForAnimatingControl:animatingControl];
+    [allTransformations addObject:transformations];
+    //    NSLog(@"⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️");
+    //    NSLog(@"🔹key: %d", [self.animatingControls
+    //    indexOfObject:animatingControl]);
+    //    NSLog(@"🔹value: %@", transformations);
+  }
+
+  return [NSArray arrayWithArray:allTransformations];
+}
+
+- (NSArray *)transformationsForAnimatingControl:
+                 (GUCAnimatingControl *)animatingControl {
+  NSMutableArray *transformations = [NSMutableArray array];
+
+  for (int i = 0; i < NUMBER_OF_TIME_PIECES; i++) {
+    NSMutableArray *timeSlotKey =
+        [self timeSlotForTimePiece:i inAnimatingControl:animatingControl];
+    if (timeSlotKey) {
+      //      NSLog(@"⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️");
+      //      NSLog(@"🔹in %@", timeSlotKey);
+      NSMutableArray *timeSlotValue = animatingControl.timeSlots[timeSlotKey];
+      NSMutableDictionary *transformation =
+          timeSlotValue[kTIME_SLOT_VALUE_TRANSFORMATION];
+      //      NSLog(@"🔹transformation: %@", transformation);
+      NSString *type = transformation.allKeys.firstObject;
+      //      NSLog(@"🔹type: %@", type);
+      if ([type isEqualToString:kTIME_SLOT_VALUE_TRANSFORMATION_TRANSLATION]) {
+        NSValue *pointValue = transformation.allValues.firstObject;
+        CGPoint translation = [pointValue CGPointValue];
+        CGPoint translationEachStep =
+            CGPointMake(translation.x / self.steps, translation.y / self.steps);
+        NSMutableDictionary *stepTranslation = [NSMutableDictionary dictionary];
+        [stepTranslation
+            setObject:[NSValue valueWithCGPoint:translationEachStep]
+               forKey:[NSNumber numberWithInt:i]];
+        [transformations addObject:stepTranslation];
+        //        NSLog(@"🔹%d is %@, value: %@", i, type,
+        //              NSStringFromCGPoint(translationEachStep));
+      }
+    } else {
+      [transformations addObject:[NSNull null]];
+    }
+  }
+
+  return [NSMutableArray arrayWithArray:transformations];
+}
+
+- (NSMutableArray *)timeSlotForTimePiece:(int)i
+                      inAnimatingControl:
+                          (GUCAnimatingControl *)animatingControl {
+  for (NSMutableArray *timeSlotKey in animatingControl.sortedTimeSlots) {
+    for (NSNumber *number in timeSlotKey) {
+      if ([number intValue] == i) {
+        return timeSlotKey;
+      }
+    }
+  }
+  return nil;
 }
 
 @end

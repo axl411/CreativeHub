@@ -28,8 +28,6 @@
  *  value is an image view which represents the transformated image from the
  *  previous image of that time slot */
 @property(nonatomic) NSMutableDictionary *timeSlotToImageViewMap;
-/** Stores all timeslots as an array, in ascending order */
-@property(nonatomic) NSMutableArray *sortedTimeSlots;
 @property(nonatomic) CGPoint accumulatedTranslateValue;
 
 @end
