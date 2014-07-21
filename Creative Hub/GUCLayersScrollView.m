@@ -7,6 +7,7 @@
 //
 
 #import "GUCLayersScrollView.h"
+#import "GUCColors.h"
 
 @interface GUCLayersScrollView ()
 
@@ -30,18 +31,15 @@
 }
 
 - (void)configSelf {
-  self.contentSize =
-      CGSizeMake(self.imageWidth * self.imageViews.count, self.imageWidth);
+  self.contentSize = CGSizeMake(self.imageWidth * self.imageViews.count,
+                                self.bounds.size.height);
 
   for (UIImageView *imageView in self.imageViews) {
     imageView.frame =
         CGRectMake(self.imageWidth * [self.imageViews indexOfObject:imageView],
                    0, self.imageWidth, self.imageWidth);
-    imageView.layer.borderColor = [[UIColor colorWithRed:209.0 / 255.0
-                                                   green:238.0 / 255.0
-                                                    blue:252.0 / 255.0
-                                                   alpha:1.0] CGColor];
-    imageView.layer.borderWidth = 1;
+    imageView.layer.borderColor = [BackgroundAnimatingColor CGColor];
+    imageView.layer.borderWidth = 3;
     [self addSubview:imageView];
   }
 
@@ -66,20 +64,6 @@
 }
 
 - (void)selectImageViewAtIndex:(NSUInteger)index {
-  for (UIImageView *imageView in self.imageViews) {
-    if ([self.imageViews indexOfObject:imageView] == index) {
-      imageView.backgroundColor = [UIColor colorWithRed:220.0 / 255.0
-                                                  green:220.0 / 255.0
-                                                   blue:220.0 / 255.0
-                                                  alpha:1.0];
-    } else {
-      imageView.backgroundColor = [UIColor colorWithRed:247.0 / 255.0
-                                                  green:247.0 / 255.0
-                                                   blue:247.0 / 255.0
-                                                  alpha:1.0];
-    }
-  }
-
   [self.layersScrollViewDelegate layersScrollView:self
                         didSelectImageViewAtIndex:index];
 }

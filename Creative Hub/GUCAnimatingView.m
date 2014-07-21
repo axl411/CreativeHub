@@ -2,7 +2,7 @@
 //  GUCAnimatingView.m
 //  Creative Hub
 //
-//  Created by 顾超 on 14-7-12.
+//  Created by 顾超 on 14-7-20.
 //  Copyright (c) 2014年 Chao Gu. All rights reserved.
 //
 
@@ -10,13 +10,16 @@
 
 @implementation GUCAnimatingView
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
+- (id)initWithFrame:(CGRect)frame {
+  self = [super initWithFrame:frame];
+  if (self) {
+    // Initialization code
+    self.rootImageView = [[UIImageView alloc] initWithFrame:frame];
+    self.containerView = [[UIView alloc] initWithFrame:frame];
+    [self addSubview:self.rootImageView];
+    [self addSubview:self.containerView];
+  }
+  return self;
 }
 
 /*

@@ -14,11 +14,7 @@
 #import "GUCCollectionViewDataSource.h"
 #import "GUCAlbumCell.h"
 #import "GUCAnimatingVC.h"
-
-#define NavigationBarDeleteColor                                               \
-  [UIColor colorWithRed:1 green:0.231 blue:0.188 alpha:1]
-#define NavigationBarNormalColor                                               \
-  [UIColor colorWithRed:0.204 green:0.667 blue:0.863 alpha:1]
+#import "GUCColors.h"
 
 @interface GUCAlbumVC ()
 
@@ -43,6 +39,9 @@
   [self loadSketchingSaves];
 
   [self setUpCollectionView];
+
+  [self.navigationController.navigationBar
+      setBarTintColor:NavigationBarNormalColor];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,6 +74,11 @@
       self.isDeleteActive = NO;
       [self.navigationController.navigationBar
           setBarTintColor:NavigationBarNormalColor];
+      [UIView animateWithDuration:0.3
+                       animations:^{
+                           [self.collectionView
+                               setBackgroundColor:BackgroundNormalColor];
+                       }];
       [self.deleteButton setTitle:@"Delete"];
       [self setTitle:@"Animation Album"];
     }
@@ -128,12 +132,22 @@
     self.isDeleteActive = NO;
     [self.navigationController.navigationBar
         setBarTintColor:NavigationBarNormalColor];
+    [UIView animateWithDuration:0.3
+                     animations:^{
+                         self.collectionView.backgroundColor =
+                             BackgroundNormalColor;
+                     }];
     [sender setTitle:@"Delete"];
     [self setTitle:@"Animation Album"];
   } else {
     self.isDeleteActive = YES;
     [self.navigationController.navigationBar
         setBarTintColor:NavigationBarDeleteColor];
+    [UIView animateWithDuration:0.3
+                     animations:^{
+                         self.collectionView.backgroundColor =
+                             BackgroundDeleteColor;
+                     }];
     [self setTitle:@"Tap to Delete..."];
     [sender setTitle:@"Done"];
   }

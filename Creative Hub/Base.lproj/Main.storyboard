@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bfm-6O-W6D">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bfm-6O-W6D">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -364,31 +364,77 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tlW-Ld-sYz">
-                                <rect key="frame" x="20" y="498" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Layer Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DeV-yy-3MF">
-                                <rect key="frame" x="250" y="498" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Animate Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S9o-2x-2dt" customClass="GUCLayersScrollView">
                                 <rect key="frame" x="0.0" y="488" width="320" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wmM-CV-974" customClass="GUCTimeBar">
+                                <rect key="frame" x="0.0" y="384" width="320" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="KVX-Ic-R8Y"/>
+                                    <constraint firstAttribute="height" constant="60" id="fDu-1d-9OD"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t8C-R4-E0M">
+                                <rect key="frame" x="0.0" y="568" width="320" height="90"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l8S-5e-28k">
+                                        <rect key="frame" x="20" y="0.0" width="90" height="90"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="Translate">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="translatePressed:" destination="Aog-iL-peU" eventType="touchUpInside" id="8fl-QY-i66"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qjd-xu-6L1">
+                                        <rect key="frame" x="115" y="0.0" width="90" height="90"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="Rotate">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="rotatePressed:" destination="Aog-iL-peU" eventType="touchUpInside" id="vXY-qW-s8z"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sLG-V7-kN5">
+                                        <rect key="frame" x="210" y="0.0" width="90" height="90"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="Scale">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="scalePressed:" destination="Aog-iL-peU" eventType="touchUpInside" id="hxw-eN-Ffj"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="7AW-us-F6K"/>
+                                    <constraint firstAttribute="width" constant="320" id="7Zz-qE-SEw"/>
+                                </constraints>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.81960784310000001" green="0.93333333330000001" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.8784313725490196" green="0.97254901960784312" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="t8C-R4-E0M" firstAttribute="leading" secondItem="oiz-Sb-lO6" secondAttribute="leading" id="13S-Mc-aMo"/>
+                            <constraint firstItem="wmM-CV-974" firstAttribute="top" secondItem="oiz-Sb-lO6" secondAttribute="top" constant="384" id="Ioh-PB-tc1"/>
+                            <constraint firstItem="g0e-lm-XqE" firstAttribute="top" secondItem="t8C-R4-E0M" secondAttribute="bottom" constant="-90" id="Lmt-Rr-95H"/>
+                            <constraint firstItem="wmM-CV-974" firstAttribute="leading" secondItem="oiz-Sb-lO6" secondAttribute="leading" id="Ott-5G-Eh9"/>
+                            <constraint firstAttribute="trailing" secondItem="t8C-R4-E0M" secondAttribute="trailing" id="c6t-yn-6rJ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Animating" id="1Qa-VD-09g"/>
                     <connections>
+                        <outlet property="actionButtonsView" destination="t8C-R4-E0M" id="j0Z-5J-74S"/>
                         <outlet property="layersScrollView" destination="S9o-2x-2dt" id="Nei-BE-bNt"/>
+                        <outlet property="timeBar" destination="wmM-CV-974" id="vVH-Jw-ivu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jik-fy-U0G" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -645,9 +691,10 @@
     </scenes>
     <resources>
         <image name="Animate" width="22" height="22"/>
-        <image name="Animate Button" width="88" height="88"/>
         <image name="Draw" width="22" height="22"/>
-        <image name="Layer Button" width="88" height="88"/>
+        <image name="Rotate" width="180" height="180"/>
+        <image name="Scale" width="180" height="180"/>
+        <image name="Translate" width="180" height="180"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
