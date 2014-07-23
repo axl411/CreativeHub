@@ -10,4 +10,6 @@
 
 @interface GUCShowAnimationVC : UIViewController
 
+@property(nonatomic) NSURL *gifURL;
+
 @end

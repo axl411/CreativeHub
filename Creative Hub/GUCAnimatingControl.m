@@ -104,6 +104,7 @@
                                                                 // activated
                                                                 // timeslot
       [self toggleActionButtonsView];
+      [self.delegate animatingControlDidToggleActionsView:self];
     } else { // tapped on a timeslot not activated
       self.activatedTimeSlotKey =
           [self timeSlotKeyForTimePieceIndex:timePieceIndex];

@@ -50,5 +50,7 @@
         (GUCAnimatingControl *)animatingControl;
 - (void)animatingControlDidUnchooseAction:
         (GUCAnimatingControl *)animatingControl;
+- (void)animatingControlDidToggleActionsView:
+(GUCAnimatingControl *)animatingControl;
 
 @end

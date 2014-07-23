@@ -435,6 +435,7 @@
                         <outlet property="actionButtonsView" destination="t8C-R4-E0M" id="j0Z-5J-74S"/>
                         <outlet property="layersScrollView" destination="S9o-2x-2dt" id="Nei-BE-bNt"/>
                         <outlet property="timeBar" destination="wmM-CV-974" id="vVH-Jw-ivu"/>
+                        <segue destination="bTU-JE-oqS" kind="push" identifier="animatingVCToShowAnimationVC" id="Dvf-jJ-Jwf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jik-fy-U0G" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -454,6 +455,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="0Xc-EB-zbC"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="daq-hP-LiM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

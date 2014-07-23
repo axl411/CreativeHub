@@ -12,10 +12,14 @@
 #import "GUCAnimatingVC.h"
 #import "GUCAnimatingView.h"
 #import "GUCColors.h"
+#import "GIF.h"
+#import "GUCShowAnimationVC.h"
 
 #define CanvasFrame CGRectMake(0, 64, 320, 320)
 #define WhiteBackgroundColor                                                   \
   [UIColor colorWithRed:0.969 green:0.969 blue:0.969 alpha:1]
+
+#define ANIMATION_STEPS 3
 
 @interface GUCAnimatingVC ()
 
@@ -107,6 +111,11 @@
 - (void)viewWillAppear:(BOOL)animated {
   [self.navigationController.navigationBar
       setBarTintColor:NavigationBarAnimatingColor];
+
+  // make the activated animating view index meaningless, so the first select on
+  // index 0 of animating scroll view will always work
+  self.activatedAnimatingViewIndex = -1;
+  [self layersScrollView:self.layersScrollView didSelectImageViewAtIndex:0];
 }
 
 - (void)viewDidLoad {
@@ -120,15 +129,10 @@
 
   [self.view bringSubviewToFront:self.timeBar];
 
-  // make the activated animating view index meaningless, so the first select on
-  // index 0 of animating scroll view will always work
-  self.activatedAnimatingViewIndex = -1;
-  [self layersScrollView:self.layersScrollView didSelectImageViewAtIndex:0];
-
   // add the playBarButton to navigation bar
   self.navigationItem.rightBarButtonItem = self.playBarButton;
 
-  self.steps = 5;
+  self.steps = ANIMATION_STEPS;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -148,17 +152,14 @@
   // Dispose of any resources that can be recreated.
 }
 
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little
-preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+  if ([segue.identifier isEqualToString:@"animatingVCToShowAnimationVC"]) {
+    GUCShowAnimationVC *showAnimationVC = segue.destinationViewController;
+    showAnimationVC.gifURL = sender;
+  }
 }
-*/
 
 #pragma mark - GUCLayersScrollViewDelegate
 
@@ -216,6 +217,11 @@ preparation before navigation
   [self setupNavigationBarNormalState];
 }
 
+- (void)animatingControlDidToggleActionsView:
+            (GUCAnimatingControl *)animatingControl {
+  self.playBarButton.enabled = !self.playBarButton.enabled;
+}
+
 #pragma mark - Actions
 
 - (IBAction)translatePressed:(UIButton *)sender {
@@ -232,6 +238,8 @@ preparation before navigation
 
 - (void)playPressed {
   NSURL *fileURL = [self generateGIF];
+  [self performSegueWithIdentifier:@"animatingVCToShowAnimationVC"
+                            sender:fileURL];
 }
 
 #pragma mark - GUCTimeBarDelegate
@@ -364,18 +372,62 @@ preparation before navigation
   }
 }
 
+#pragma mark - GIF generating related methods
+
 - (NSURL *)generateGIF {
   NSArray *images = [self sequentialImagesOfAnimation];
-  return nil;
+  NSURL *gifURL = [GIF makeAnimatedGifFromImages:images];
+  return gifURL;
 }
 
 - (NSArray *)sequentialImagesOfAnimation {
   NSMutableArray *images = [NSMutableArray array];
 
   NSArray *allTransformations = [self allTransformations];
-  //  for (NSArray *transformations in allTransformations) {
-  //    NSLog(@"🔹%@", transformations);
-  //  }
+
+  //  NSMutableArray *oldAlphaValuesOfImageViews = [NSMutableArray array];
+  //  NSMutableArray *oldAlphaValuesOfAnimatingViews = [NSMutableArray array];
+  for (GUCAnimatingView *view in self.animatingViews) {
+    view.containerView.hidden = YES;
+    //    [oldAlphaValuesOfImageViews
+    //        addObject:[NSNumber numberWithFloat:view.rootImageView.alpha]];
+    //    [oldAlphaValuesOfAnimatingViews
+    //        addObject:[NSNumber numberWithFloat:view.alpha]];
+    view.rootImageView.alpha = 1.0f;
+    view.alpha = 1.0f;
+  }
+
+  for (int i = 0; i < NUMBER_OF_TIME_PIECES * self.steps; i++) {
+    for (int j = 0; j < allTransformations.count; j++) {
+      GUCAnimatingControl *animatingControl = self.animatingControls[j];
+      UIImageView *imageView = animatingControl.animatingView.rootImageView;
+
+      NSArray *transformations = allTransformations[j];
+      NSMutableDictionary *stepTransformation = transformations[i / self.steps];
+
+      if (![stepTransformation isKindOfClass:[NSNull class]]) {
+        [self applyTransformation:stepTransformation toView:imageView];
+      }
+    }
+
+    UIImage *image = [self captureImageInView:self.embedView];
+    [images addObject:image];
+  }
+
+  for (GUCAnimatingView *view in self.animatingViews) {
+    view.containerView.hidden = NO;
+    view.transform = CGAffineTransformIdentity;
+      view.rootImageView.center = view.center;
+    //    NSNumber *imageViewAlphaNumber = [oldAlphaValuesOfImageViews
+    //    lastObject];
+    //    NSNumber *animatingViewAlphaNumber =
+    //        [oldAlphaValuesOfAnimatingViews lastObject];
+    //    view.rootImageView.alpha = [imageViewAlphaNumber floatValue];
+    //    view.alpha = [animatingViewAlphaNumber floatValue];
+    //    NSLog(@"🔹%f, %f", view.rootImageView.alpha, view.alpha);
+    //    [oldAlphaValuesOfImageViews removeLastObject];
+    //    [oldAlphaValuesOfAnimatingViews removeLastObject];
+  }
 
   return [NSArray arrayWithArray:images];
 }
@@ -407,30 +459,37 @@ preparation before navigation
       //      NSLog(@"⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️");
       //      NSLog(@"🔹in %@", timeSlotKey);
       NSMutableArray *timeSlotValue = animatingControl.timeSlots[timeSlotKey];
-      NSMutableDictionary *transformation =
-          timeSlotValue[kTIME_SLOT_VALUE_TRANSFORMATION];
-      //      NSLog(@"🔹transformation: %@", transformation);
-      NSString *type = transformation.allKeys.firstObject;
-      //      NSLog(@"🔹type: %@", type);
-      if ([type isEqualToString:kTIME_SLOT_VALUE_TRANSFORMATION_TRANSLATION]) {
-        NSValue *pointValue = transformation.allValues.firstObject;
-        CGPoint translation = [pointValue CGPointValue];
-        CGPoint translationEachStep =
-            CGPointMake(translation.x / self.steps, translation.y / self.steps);
-        NSMutableDictionary *stepTranslation = [NSMutableDictionary dictionary];
-        [stepTranslation
-            setObject:[NSValue valueWithCGPoint:translationEachStep]
-               forKey:[NSNumber numberWithInt:i]];
-        [transformations addObject:stepTranslation];
-        //        NSLog(@"🔹%d is %@, value: %@", i, type,
-        //              NSStringFromCGPoint(translationEachStep));
+      if (timeSlotValue) {
+        NSMutableDictionary *transformation =
+            timeSlotValue[kTIME_SLOT_VALUE_TRANSFORMATION];
+        //      NSLog(@"🔹transformation: %@", transformation);
+        NSString *type = transformation.allKeys.firstObject;
+        //      NSLog(@"🔹type: %@", type);
+        if ([type
+                isEqualToString:kTIME_SLOT_VALUE_TRANSFORMATION_TRANSLATION]) {
+          NSValue *pointValue = transformation.allValues.firstObject;
+          CGPoint translation = [pointValue CGPointValue];
+          CGPoint translationEachStep =
+              CGPointMake(translation.x / (self.steps * timeSlotKey.count),
+                          translation.y / (self.steps * timeSlotKey.count));
+          NSMutableDictionary *stepTranslation =
+              [NSMutableDictionary dictionary];
+          [stepTranslation
+              setObject:[NSValue valueWithCGPoint:translationEachStep]
+                 forKey:kTIME_SLOT_VALUE_TRANSFORMATION_TRANSLATION];
+          [transformations addObject:stepTranslation];
+          //        NSLog(@"🔹%d is %@, value: %@", i, type,
+          //              NSStringFromCGPoint(translationEachStep));
+        } else {
+          [transformations addObject:[NSNull null]];
+        }
       }
     } else {
       [transformations addObject:[NSNull null]];
     }
   }
 
-  return [NSMutableArray arrayWithArray:transformations];
+  return [NSArray arrayWithArray:transformations];
 }
 
 - (NSMutableArray *)timeSlotForTimePiece:(int)i
@@ -444,6 +503,31 @@ preparation before navigation
     }
   }
   return nil;
+}
+
+- (void)applyTransformation:(NSMutableDictionary *)stepTransformation
+                     toView:(UIView *)view {
+  NSString *type = stepTransformation.allKeys.firstObject;
+  if ([type isEqualToString:kTIME_SLOT_VALUE_TRANSFORMATION_TRANSLATION]) {
+    CGPoint viewLocation = view.center;
+    NSValue *value = stepTransformation.allValues.firstObject;
+    CGPoint translation = [value CGPointValue];
+
+    viewLocation.x += translation.x;
+    viewLocation.y += translation.y;
+
+    view.center = viewLocation;
+  } else {
+    // TODO: rotation and scaling
+  }
+}
+
+- (UIImage *)captureImageInView:(UIView *)view {
+  UIGraphicsBeginImageContext(view.frame.size);
+  [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+  UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+  UIGraphicsEndImageContext();
+  return image;
 }
 
 @end
