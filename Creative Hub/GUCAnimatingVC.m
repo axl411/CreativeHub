@@ -237,9 +237,31 @@
 }
 
 - (void)playPressed {
-  NSURL *fileURL = [self generateGIF];
-  [self performSegueWithIdentifier:@"animatingVCToShowAnimationVC"
-                            sender:fileURL];
+  self.view.userInteractionEnabled = NO;
+  UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc]
+      initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+  activityIndicator.center = self.view.center;
+  UIView *shaderView = [[UIView alloc] initWithFrame:self.view.frame];
+  shaderView.backgroundColor = [UIColor blackColor];
+  shaderView.alpha = 0.5;
+  [self.view addSubview:shaderView];
+  [shaderView addSubview:activityIndicator];
+  [activityIndicator startAnimating];
+
+  dispatch_queue_t animationGeneratingQueue =
+      dispatch_queue_create("edu.self.AnimationGeneratingQueue", NULL);
+  dispatch_async(animationGeneratingQueue, ^{
+
+      NSURL *fileURL = [self generateGIF];
+      NSLog(@"🔹loading complete");
+      dispatch_async(dispatch_get_main_queue(), ^{
+          [self performSegueWithIdentifier:@"animatingVCToShowAnimationVC"
+                                    sender:fileURL];
+          [activityIndicator removeFromSuperview];
+          [shaderView removeFromSuperview];
+          self.view.userInteractionEnabled = YES;
+      });
+  });
 }
 
 #pragma mark - GUCTimeBarDelegate
@@ -417,7 +439,7 @@
   for (GUCAnimatingView *view in self.animatingViews) {
     view.containerView.hidden = NO;
     view.transform = CGAffineTransformIdentity;
-      view.rootImageView.center = view.center;
+    view.rootImageView.center = view.center;
     //    NSNumber *imageViewAlphaNumber = [oldAlphaValuesOfImageViews
     //    lastObject];
     //    NSNumber *animatingViewAlphaNumber =

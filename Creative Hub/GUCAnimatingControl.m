@@ -439,7 +439,7 @@
     [UIView animateWithDuration:0.3
                      animations:^{ imageView.alpha = initialAlpha; }];
   }
-  for (int i = steps; i < self.sortedTimeSlots.count; i++) {
+  for (int i = (int)steps; i < self.sortedTimeSlots.count; i++) {
     UIImageView *imageView =
         self.timeSlotToImageViewMap[self.sortedTimeSlots[i]];
     [UIView animateWithDuration:0.3 animations:^{ imageView.alpha = 0.0; }];
@@ -451,7 +451,6 @@
   imageView.center = self.animatingView.rootImageView.center;
   imageView.transform = CGAffineTransformIdentity;
 
-  NSLog(@"🔹apply all transformation before %d", index);
   for (int i = 0; i <= index; i++) {
     [self applyTransformationToImageView:imageView atIndex:i];
   }

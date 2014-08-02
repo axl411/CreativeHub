@@ -79,7 +79,7 @@
                            [self.collectionView
                                setBackgroundColor:BackgroundNormalColor];
                        }];
-      [self.deleteButton setTitle:@"Delete"];
+      [self.deleteButton setTitle:@"Edit"];
       [self setTitle:@"Animation Album"];
     }
   }
@@ -107,18 +107,6 @@
   return YES;
 }
 
-- (BOOL)collectionView:(UICollectionView *)collectionView
-      canPerformAction:(SEL)action
-    forItemAtIndexPath:(NSIndexPath *)indexPath
-            withSender:(id)sender {
-  // Support only deleting of cells.
-  if ([NSStringFromSelector(action) isEqualToString:@"delete:"])
-    return YES;
-
-  // Prevent all other actions.
-  return NO;
-}
-
 - (void)collectionView:(UICollectionView *)collectionView
          performAction:(SEL)action
     forItemAtIndexPath:(NSIndexPath *)indexPath
@@ -137,7 +125,7 @@
                          self.collectionView.backgroundColor =
                              BackgroundNormalColor;
                      }];
-    [sender setTitle:@"Delete"];
+    [sender setTitle:@"Edit"];
     [self setTitle:@"Animation Album"];
   } else {
     self.isDeleteActive = YES;

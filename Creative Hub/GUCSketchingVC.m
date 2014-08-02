@@ -826,7 +826,7 @@
 - (UIImage *)imageCombinedWithAllSketchingViews {
   self.embedView = nil;
   [self.view addSubview:self.embedView];
-  for (int i = self.sketchingViews.count - 1; i >= 0; i--) {
+  for (int i = (int)self.sketchingViews.count - 1; i >= 0; i--) {
     UIImageView *imageView = [[UIImageView alloc]
         initWithFrame:CGRectMake(0.0, 0.0, self.embedView.frame.size.width,
                                  self.embedView.frame.size.height)];

@@ -133,15 +133,17 @@ preparation before navigation
                     if (image) {
                       [[SAMCache sharedCache] setImage:image
                                                 forKey:imageAddressString];
-                      dispatch_async(dispatch_get_main_queue(), ^{
-                          [activityIndicator stopAnimating];
-                          imageView.image = image;
-                      });
+                      if ([[collectionView indexPathsForVisibleItems]
+                              containsObject:indexPath]) {
+                        [activityIndicator stopAnimating];
+                        imageView.image = image;
+                      }
                     } else {
-                      dispatch_async(dispatch_get_main_queue(), ^{
-                          [activityIndicator stopAnimating];
-                          imageView.image = [UIImage imageNamed:@"noImage"];
-                      });
+                      if ([[collectionView indexPathsForVisibleItems]
+                              containsObject:indexPath]) {
+                        [activityIndicator stopAnimating];
+                        imageView.image = [UIImage imageNamed:@"noImage"];
+                      }
                     }
                   }
               }];

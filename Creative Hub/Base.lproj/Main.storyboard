@@ -62,12 +62,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Animation Album" id="peM-p5-55n">
-                        <barButtonItem key="leftBarButtonItem" title="Delete" id="Znb-Hg-yFv">
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="Znb-Hg-yFv">
                             <connections>
                                 <action selector="deleteButtonPressed:" destination="1RO-d0-3l5" id="qIV-BH-Ijv"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="Draw" style="plain" id="oeb-y2-2Z0">
+                        <barButtonItem key="rightBarButtonItem" image="Draw" id="oeb-y2-2Z0">
                             <color key="tintColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="je8-n0-Blb" kind="push" identifier="albumToSketchingVC" id="VCA-C3-tpl"/>
@@ -191,7 +191,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ilQ-Fl-dgG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1385" y="-1188"/>
+            <point key="canvasLocation" x="1367" y="-638"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lqW-GO-zmL">
@@ -350,7 +350,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wja-dK-AVC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="883" y="-407"/>
+            <point key="canvasLocation" x="865" y="143"/>
         </scene>
         <!--AnimatingVC - Animating-->
         <scene sceneID="OGh-Hh-gmv">
@@ -440,7 +440,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jik-fy-U0G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="883" y="385"/>
+            <point key="canvasLocation" x="865" y="935"/>
         </scene>
         <!--Show AnimationVC - Your Animation...-->
         <scene sceneID="Yvy-Gn-ESr">
@@ -459,7 +459,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="daq-hP-LiM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1385" y="385"/>
+            <point key="canvasLocation" x="1367" y="935"/>
         </scene>
         <!--LayersVC-->
         <scene sceneID="uNp-EE-SXW">
@@ -555,7 +555,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GIZ-mz-ZZx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2338" y="-1188"/>
+            <point key="canvasLocation" x="2320" y="-638"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="HGV-Kn-nDB">
@@ -573,7 +573,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aMy-Qu-yNt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1875" y="-1188"/>
+            <point key="canvasLocation" x="1857" y="-638"/>
         </scene>
         <!--Color PickerVC-->
         <scene sceneID="J6e-Ef-dcf">
@@ -688,7 +688,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZhT-qq-jVI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1875" y="-413"/>
+            <point key="canvasLocation" x="1857" y="137"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZBd-x7-eCa">
@@ -706,7 +706,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CBg-kL-aPc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1385" y="-407"/>
+            <point key="canvasLocation" x="1367" y="143"/>
         </scene>
     </scenes>
     <resources>
