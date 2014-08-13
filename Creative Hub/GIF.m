@@ -25,8 +25,7 @@
     (__bridge id)kCGImagePropertyGIFDictionary : @{
       (__bridge id)kCGImagePropertyGIFDelayTime :
           @0.025f, // a float (not double!) in seconds, rounded to
-                   // centiseconds
-                   // in the GIF data
+                   // centiseconds in the GIF data
     }
   };
 

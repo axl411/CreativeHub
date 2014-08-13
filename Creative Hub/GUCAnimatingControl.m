@@ -11,6 +11,8 @@
 #import "GUCAnimatingView.h"
 #import "GUCColors.h"
 #import "GUCLayersScrollView.h"
+#import <QuartzCore/QuartzCore.h>
+#import <math.h>
 
 @interface GUCAnimatingControl ()
 
@@ -24,11 +26,19 @@
 /** Gesture recognizer for dealing with dragging when the selected action is
  *  translation */
 @property(nonatomic) UIPanGestureRecognizer *panRecognizerForTranslation;
+/** Gesture recognizer for moving the anchor point when the selected action is
+ *  rotation or scaling */
+@property(nonatomic) UIPanGestureRecognizer *panRecognizerForRotationAndScaling;
+@property(nonatomic) UIRotationGestureRecognizer *rotationRecognizer;
+@property(nonatomic) UIPinchGestureRecognizer *pinchRecognizer;
 /** A dictionary whose key is the time slot object (array of numbers) and whose
  *  value is an image view which represents the transformated image from the
  *  previous image of that time slot */
 @property(nonatomic) NSMutableDictionary *timeSlotToImageViewMap;
 @property(nonatomic) CGPoint accumulatedTranslateValue;
+@property(nonatomic) CGFloat accumulatedRotationAngle;
+@property(nonatomic) CGPoint anchorPointOffset;
+@property(nonatomic) CGPoint animatingViewInitialCenter;
 
 @end
 
@@ -58,6 +68,11 @@
 
 #pragma mark - Properties
 
+- (void)setAnimatingView:(GUCAnimatingView *)animatingView {
+  _animatingView = animatingView;
+  self.animatingViewInitialCenter = animatingView.center;
+}
+
 - (UIGestureRecognizer *)panRecognizerForTranslation {
   if (!_panRecognizerForTranslation) {
     _panRecognizerForTranslation = [[UIPanGestureRecognizer alloc]
@@ -65,6 +80,57 @@
                 action:@selector(panForTranslation:)];
   }
   return _panRecognizerForTranslation;
+}
+
+- (UIPanGestureRecognizer *)panRecognizerForRotationAndScaling {
+  if (!_panRecognizerForRotationAndScaling) {
+    _panRecognizerForRotationAndScaling = [[UIPanGestureRecognizer alloc]
+        initWithTarget:self
+                action:@selector(panForMovingAnchorPoint:)];
+  }
+  return _panRecognizerForRotationAndScaling;
+}
+
+- (UIRotationGestureRecognizer *)rotationRecognizer {
+  if (!_rotationRecognizer) {
+    _rotationRecognizer = [[UIRotationGestureRecognizer alloc]
+        initWithTarget:self
+                action:@selector(rotationDetected:)];
+  }
+  return _rotationRecognizer;
+}
+
+- (UIPinchGestureRecognizer *)pinchRecognizer {
+  if (!_pinchRecognizer) {
+    _pinchRecognizer = [[UIPinchGestureRecognizer alloc]
+        initWithTarget:self
+                action:@selector(pinchDetected:)];
+  }
+  return _pinchRecognizer;
+}
+
+- (UIView *)anchorPointView {
+  if (!_anchorPointView) {
+    _anchorPointView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
+    _anchorPointView.center =
+        CGPointMake(self.animatingView.frame.size.width / 2,
+                    self.animatingView.frame.size.height / 2);
+    [_anchorPointView.layer setCornerRadius:5];
+    _anchorPointView.backgroundColor = ANIMATING_VIEW_ANCHOR_POINT_COLOR;
+  }
+
+  return _anchorPointView;
+}
+
+- (PulsingHaloLayer *)pulsingHeloLayer {
+  if (!_pulsingHeloLayer) {
+    _pulsingHeloLayer = [PulsingHaloLayer layer];
+    _pulsingHeloLayer.radius = 20;
+    _pulsingHeloLayer.backgroundColor =
+        ANIMATING_VIEW_ANCHOR_POINT_COLOR.CGColor;
+    [_pulsingHeloLayer setAnimationDuration:1];
+  }
+  return _pulsingHeloLayer;
 }
 
 #pragma mark - Animating Timebar related Actions
@@ -105,18 +171,22 @@
                                                                 // timeslot
       [self toggleActionButtonsView];
       [self.delegate animatingControlDidToggleActionsView:self];
+
+      [self.anchorPointView removeFromSuperview];
+      [self.pulsingHeloLayer removeFromSuperlayer];
     } else { // tapped on a timeslot not activated
       self.activatedTimeSlotKey =
           [self timeSlotKeyForTimePieceIndex:timePieceIndex];
 
-      // apply all transformation to imageviews before selected imageview
-      for (int i = 0;
-           i <= [self.sortedTimeSlots indexOfObject:self.activatedTimeSlotKey];
-           i++) {
-        [self applyTransformationToImageView:self.timeSlotToImageViewMap
-                                                 [self.sortedTimeSlots[i]]
-                            atAndBeforeIndex:i];
-      }
+      UIImageView *imageView =
+          self.timeSlotToImageViewMap[self.activatedTimeSlotKey];
+      imageView.center = self.animatingViewInitialCenter;
+      imageView.transform = CGAffineTransformIdentity;
+      imageView.layer.anchorPoint = CGPointMake(0.5f, 0.5f);
+
+      [self applyTransformationsBeforeActivatedTimeSlot];
+
+      [self clearAccumulatedValue];
 
       [self preparationForTimeSlotKeyActivated:self.activatedTimeSlotKey];
     }
@@ -127,18 +197,68 @@
 - (void)translatePressed {
   self.selectedAction = GUCTransformationTranslation;
   [self.delegate animatingControlDidChooseTranslation:self];
-  // TODO: remove other gesture recognizers
+
+  // remove other gesture recognizers,
+  [self.animatingView
+      removeGestureRecognizer:self.panRecognizerForRotationAndScaling];
+  [self.animatingView removeGestureRecognizer:self.rotationRecognizer];
+  [self.animatingView removeGestureRecognizer:self.pinchRecognizer];
+
+  // remove anchor point
+  [self.anchorPointView removeFromSuperview];
+  [self.pulsingHeloLayer removeFromSuperlayer];
+
+  [self clearCurrentImageViewTransformation];
+
   [self.animatingView addGestureRecognizer:self.panRecognizerForTranslation];
 }
 
 - (void)rotatePressed {
   self.selectedAction = GUCTransformationRotation;
   [self.delegate animatingControlDidChooseRotation:self];
+
+  // remove other gesture recognizers
+  [self.animatingView removeGestureRecognizer:self.panRecognizerForTranslation];
+  [self.animatingView removeGestureRecognizer:self.pinchRecognizer];
+
+  [self clearCurrentImageViewTransformation];
+
+  // add gesture recognizer
+  [self.animatingView
+      addGestureRecognizer:self.panRecognizerForRotationAndScaling];
+  [self.animatingView addGestureRecognizer:self.rotationRecognizer];
+
+  // add anchor point
+  self.anchorPointView.center = self.animatingViewInitialCenter;
+  self.pulsingHeloLayer.position = self.animatingViewInitialCenter;
+  [self.animatingView addSubview:self.anchorPointView];
+  self.pulsingHeloLayer.position = self.anchorPointView.center;
+  [self.animatingView.layer insertSublayer:self.pulsingHeloLayer
+                                     below:self.anchorPointView.layer];
 }
 
 - (void)scalePressed {
   self.selectedAction = GUCTransformationScaling;
   [self.delegate animatingControlDidChooseScaling:self];
+
+  // remove other gesture recognizers
+  [self.animatingView removeGestureRecognizer:self.panRecognizerForTranslation];
+  [self.animatingView removeGestureRecognizer:self.rotationRecognizer];
+
+  [self clearCurrentImageViewTransformation];
+
+  // add gesture recognizer
+  [self.animatingView
+      addGestureRecognizer:self.panRecognizerForRotationAndScaling];
+  [self.animatingView addGestureRecognizer:self.pinchRecognizer];
+
+  // add anchor point
+  self.anchorPointView.center = self.animatingViewInitialCenter;
+  self.pulsingHeloLayer.position = self.animatingViewInitialCenter;
+  [self.animatingView addSubview:self.anchorPointView];
+  self.pulsingHeloLayer.position = self.anchorPointView.center;
+  [self.animatingView.layer insertSublayer:self.pulsingHeloLayer
+                                     below:self.anchorPointView.layer];
 }
 
 #pragma mark - Gesture Methods for Translation, Rotation and Scaling
@@ -156,7 +276,6 @@
   tempPoint.x += translation.x;
   tempPoint.y += translation.y;
   self.accumulatedTranslateValue = tempPoint;
-  NSLog(@"🔹%@", NSStringFromCGPoint(self.accumulatedTranslateValue));
 
   imageView.center = imageViewPosition;
   [panRecognizer setTranslation:CGPointZero inView:self.animatingView];
@@ -164,20 +283,156 @@
   if (panRecognizer.state == UIGestureRecognizerStateCancelled ||
       panRecognizer.state == UIGestureRecognizerStateEnded) {
     NSMutableDictionary *transformation = [self currentTransformation];
+    [transformation removeAllObjects];
     [transformation
         setObject:[NSValue valueWithCGPoint:self.accumulatedTranslateValue]
            forKey:kTIME_SLOT_VALUE_TRANSFORMATION_TRANSLATION];
   }
 }
 
-#pragma mark - Helper
+- (void)panForMovingAnchorPoint:(UIPanGestureRecognizer *)panRecognizer {
+  UIImageView *imageView =
+      self.timeSlotToImageViewMap[self.activatedTimeSlotKey];
 
-- (NSMutableDictionary *)currentTransformation {
-  NSMutableArray *timeSlotValue = self.timeSlots[self.activatedTimeSlotKey];
-  NSMutableDictionary *transformation =
-      timeSlotValue[kTIME_SLOT_VALUE_TRANSFORMATION];
-  return transformation;
+  if (panRecognizer.state == UIGestureRecognizerStateBegan) {
+    [self clearCurrentImageViewTransformation];
+    //    self.anchorPointOffset = CGPointZero;
+  }
+
+  CGPoint translation = [panRecognizer translationInView:self.animatingView];
+  CGPoint anchorPointPosition = self.anchorPointView.center;
+  anchorPointPosition.x += translation.x;
+  anchorPointPosition.y += translation.y;
+
+  if (anchorPointPosition.x < 0) {
+    anchorPointPosition.x = 0;
+  }
+  if (anchorPointPosition.x > 320) {
+    anchorPointPosition.x = 320;
+  }
+  if (anchorPointPosition.y < 0) {
+    anchorPointPosition.y = 0;
+  }
+  if (anchorPointPosition.y > 320) {
+    anchorPointPosition.y = 320;
+  }
+
+  self.anchorPointView.center = anchorPointPosition;
+  [panRecognizer setTranslation:CGPointZero inView:self.animatingView];
+
+  [self.pulsingHeloLayer setPosition:anchorPointPosition];
+
+  if (panRecognizer.state == UIGestureRecognizerStateEnded ||
+      panRecognizer.state == UIGestureRecognizerStateCancelled) {
+
+    [self applyTransformationsBeforeActivatedTimeSlot];
+
+    NSLog(@"🔹before converting: %f, %f", self.anchorPointView.center.x,
+          self.anchorPointView.center.y);
+
+    anchorPointPosition = [imageView convertPoint:self.anchorPointView.center
+                                         fromView:self.animatingView];
+
+    NSLog(@"🔹after converting: %f, %f", anchorPointPosition.x,
+          anchorPointPosition.y);
+
+    CGPoint newAnchorPoint = CGPointMake(
+        anchorPointPosition.x / self.animatingView.frame.size.width,
+        anchorPointPosition.y / self.animatingView.frame.size.height);
+
+    [imageView.layer setAnchorPoint:newAnchorPoint];
+
+    // the view will be moved if the anchor point position is changed, add the
+    // offset so the view seems stands still
+    self.anchorPointOffset = CGPointMake(
+        self.anchorPointView.center.x - self.animatingView.center.x,
+        self.anchorPointView.center.y - self.animatingView.center.y);
+    CGPoint animatingViewPosition = self.animatingView.center;
+    animatingViewPosition.x += self.anchorPointOffset.x;
+    animatingViewPosition.y += self.anchorPointOffset.y;
+    imageView.center = animatingViewPosition;
+
+    NSLog(@"🔹new anchor point offset: %@",
+          NSStringFromCGPoint(self.anchorPointOffset));
+
+    CGPoint previousTraslation = [self totalTranslationBeforeCurrentTimeSlot];
+    CGPoint adjustedOffset = self.anchorPointOffset;
+    adjustedOffset.x -= previousTraslation.x;
+    adjustedOffset.y -= previousTraslation.y;
+    self.anchorPointOffset = adjustedOffset;
+  }
 }
+
+- (void)rotationDetected:(UIRotationGestureRecognizer *)rotationRecognizer {
+  UIImageView *imageView =
+      self.timeSlotToImageViewMap[self.activatedTimeSlotKey];
+
+  CGFloat angle = rotationRecognizer.rotation;
+  self.accumulatedRotationAngle += angle;
+  imageView.transform = CGAffineTransformRotate(imageView.transform, angle);
+  rotationRecognizer.rotation = 0.0;
+
+  if (rotationRecognizer.state == UIGestureRecognizerStateCancelled ||
+      rotationRecognizer.state == UIGestureRecognizerStateEnded) {
+    NSMutableDictionary *transformation = [self currentTransformation];
+    [transformation removeAllObjects];
+    NSLog(@"🔹to set:\nanchor point: %@, angle: %f",
+          NSStringFromCGPoint(imageView.layer.anchorPoint),
+          self.accumulatedRotationAngle);
+    NSMutableDictionary *rotation = [NSMutableDictionary dictionary];
+    [rotation setObject:[NSValue valueWithCGPoint:imageView.layer.anchorPoint]
+                 forKey:kROTATION_ANCHOR_POINT];
+    [rotation setObject:[NSNumber numberWithFloat:self.accumulatedRotationAngle]
+                 forKey:kROTATION_VALUE];
+    [rotation setObject:[NSValue valueWithCGPoint:imageView.center]
+                 forKey:kROTATION_CENTER];
+    [transformation
+        setObject:[NSValue valueWithCGPoint:self.anchorPointOffset]
+           forKey:kTIME_SLOT_VALUE_TRANSFORMATION_ANCHOR_POINT_OFFSET];
+    [transformation setObject:rotation
+                       forKey:kTIME_SLOT_VALUE_TRANSFORMATION_ROTATION];
+  }
+}
+
+- (void)pinchDetected:(UIPinchGestureRecognizer *)pinchRecognizer {
+  UIImageView *imageView =
+      self.timeSlotToImageViewMap[self.activatedTimeSlotKey];
+
+  CGFloat scale = pinchRecognizer.scale;
+  imageView.transform =
+      CGAffineTransformScale(imageView.transform, scale, scale);
+  pinchRecognizer.scale = 1.0;
+
+  if (pinchRecognizer.state == UIGestureRecognizerStateCancelled ||
+      pinchRecognizer.state == UIGestureRecognizerStateEnded) {
+    NSMutableDictionary *transformation = [self currentTransformation];
+    [transformation removeAllObjects];
+
+    CGAffineTransform t = imageView.transform;
+    CGFloat scaleToSet = sqrt(t.a * t.a + t.c * t.c);
+
+    NSLog(@"🔹to set:\nanchor point: %@, scale: %f",
+          NSStringFromCGPoint(imageView.layer.anchorPoint), scaleToSet);
+
+    NSLog(@"🔹transform: %@",
+          NSStringFromCGAffineTransform(imageView.transform));
+
+    NSMutableDictionary *scaling = [NSMutableDictionary dictionary];
+    [scaling setObject:[NSValue valueWithCGPoint:imageView.layer.anchorPoint]
+                forKey:kSCALING_ANCHOR_POINT];
+    [scaling setObject:[NSNumber numberWithFloat:scaleToSet]
+                forKey:kSCALING_VALUE];
+    [scaling setObject:[NSValue valueWithCGPoint:imageView.center]
+                forKey:kSCALING_CENTER];
+    [transformation
+        setObject:[NSValue valueWithCGPoint:self.anchorPointOffset]
+           forKey:kTIME_SLOT_VALUE_TRANSFORMATION_ANCHOR_POINT_OFFSET];
+    [transformation setObject:scaling
+                       forKey:kTIME_SLOT_VALUE_TRANSFORMATION_SCALING];
+  }
+}
+
+#pragma mark - Helper
 
 - (void)toggleActionButtonsView {
   if (self.isChoosingAction) {
@@ -328,12 +583,42 @@
           }
       }];
 
-  // create an imageview representing the new position of the image after
-  // transformation is applied, initially it overlaps with the original image
-  UIImageView *imageView = [[UIImageView alloc]
+  /*  // create an imageview representing the new position of the image after
+    // transformation is applied, initially it overlaps with the original image
+    UIImageView *imageView;
+    NSInteger timeSlotIndex = [self.sortedTimeSlots indexOfObject:timeSlotKey];
+    if (timeSlotIndex == 0) {
+      imageView = [[UIImageView alloc]
+          initWithImage:self.animatingView.rootImageView.image];
+      imageView.frame = CGRectMake(0, 0, self.animatingView.frame.size.width,
+                                   self.animatingView.frame.size.height);
+    } else {
+      UIImageView *previousImageView =
+          self.timeSlotToImageViewMap.allValues[timeSlotIndex - 1];
+      imageView = [[UIImageView alloc]
+          initWithImage:self.animatingView.rootImageView.image];
+      imageView.frame = CGRectMake(0, 0, self.animatingView.frame.size.width,
+                                   self.animatingView.frame.size.height);
+      imageView.layer.anchorPoint = previousImageView.layer.anchorPoint;
+      imageView.center = previousImageView.center;
+      //
+      //    CGPoint centerOffset =
+      //        CGPointMake((imageView.layer.anchorPoint.x - 0.5) *
+      //                        self.animatingView.frame.size.width,
+      //                    (imageView.layer.anchorPoint.y - 0.5) *
+      //                        self.animatingView.frame.size.height);
+      //    CGPoint imageViewLocation = imageView.center;
+      //    imageViewLocation.x -= centerOffset.x;
+      //    imageViewLocation.y -= centerOffset.y;
+      //    imageView.center = imageViewLocation;
+    } */
+
+  UIImageView *imageView;
+  imageView = [[UIImageView alloc]
       initWithImage:self.animatingView.rootImageView.image];
   imageView.frame = CGRectMake(0, 0, self.animatingView.frame.size.width,
                                self.animatingView.frame.size.height);
+
   imageView.alpha = 0.0;
   [self.animatingView.containerView addSubview:imageView];
   self.timeSlotToImageViewMap[timeSlotKey] = imageView;
@@ -451,44 +736,180 @@
   imageView.center = self.animatingView.rootImageView.center;
   imageView.transform = CGAffineTransformIdentity;
 
+  NSLog(@"🔹transformation for imageview of index %d", index);
   for (int i = 0; i <= index; i++) {
     [self applyTransformationToImageView:imageView atIndex:i];
   }
+
+  CGPoint anchorPointOffset = CGPointZero;
+  for (NSInteger i = index; i >= 0; i--) {
+    NSMutableArray *timeSlotValue = self.timeSlots[self.sortedTimeSlots[i]];
+    NSMutableDictionary *timeSlotValueTransformation =
+        timeSlotValue[kTIME_SLOT_VALUE_TRANSFORMATION];
+    NSValue *anchorPointOffsetValue = timeSlotValueTransformation
+        [kTIME_SLOT_VALUE_TRANSFORMATION_ANCHOR_POINT_OFFSET];
+    CGPoint offset = [anchorPointOffsetValue CGPointValue];
+    if (!CGPointEqualToPoint(offset, CGPointZero)) {
+      anchorPointOffset = offset;
+      break;
+    }
+  }
+
+  CGPoint animatingViewPosition = imageView.center;
+  animatingViewPosition.x += anchorPointOffset.x;
+  animatingViewPosition.y += anchorPointOffset.y;
+  imageView.center = animatingViewPosition;
+  NSLog(@"🔹anchor point offset: %f, %f", anchorPointOffset.x,
+        anchorPointOffset.y);
 }
 
 - (void)applyTransformationToImageView:(UIImageView *)imageView
                                atIndex:(NSInteger)index {
   NSMutableDictionary *transformation =
       [self transformationForTimeslotAtIndex:index];
-  NSString *transformationType = [transformation.allKeys firstObject];
+  NSArray *transformationKeys = transformation.allKeys;
+  for (NSString *key in transformationKeys) {
+    if (![key isEqualToString:
+                  kTIME_SLOT_VALUE_TRANSFORMATION_ANCHOR_POINT_OFFSET]) {
+      NSString *transformationType = key;
+      if ([transformationType
+              isEqualToString:kTIME_SLOT_VALUE_TRANSFORMATION_TRANSLATION]) {
+        NSValue *pointValue = [transformation
+            objectForKey:kTIME_SLOT_VALUE_TRANSFORMATION_TRANSLATION];
+        CGPoint translation = [pointValue CGPointValue];
+        CGPoint imageViewPosition = imageView.center;
+        imageViewPosition.x += translation.x;
+        imageViewPosition.y += translation.y;
+        imageView.center = imageViewPosition;
+        NSLog(@"🔹apply translation: %@", NSStringFromCGPoint(translation));
+      } else if ([transformationType
+                     isEqualToString:
+                         kTIME_SLOT_VALUE_TRANSFORMATION_ROTATION]) {
+        NSMutableDictionary *rotation = [transformation
+            objectForKey:kTIME_SLOT_VALUE_TRANSFORMATION_ROTATION];
+        CGPoint anchorPoint =
+            [((NSValue *)[rotation objectForKey:kROTATION_ANCHOR_POINT])
+                CGPointValue];
+        CGFloat rotationValue =
+            [((NSNumber *)[rotation objectForKey:kROTATION_VALUE])floatValue];
+        imageView.layer.anchorPoint = anchorPoint;
+
+        imageView.transform =
+            CGAffineTransformRotate(imageView.transform, rotationValue);
+
+        NSLog(@"🔹applied rotation at anchor point %f, %f",
+              imageView.layer.anchorPoint.x, imageView.layer.anchorPoint.y);
+      } else if ([transformationType
+                     isEqualToString:kTIME_SLOT_VALUE_TRANSFORMATION_SCALING]) {
+        NSMutableDictionary *scaling = [transformation
+            objectForKey:kTIME_SLOT_VALUE_TRANSFORMATION_SCALING];
+        CGPoint anchorPoint =
+            [((NSValue *)[scaling objectForKey:kSCALING_ANCHOR_POINT])
+                CGPointValue];
+        CGFloat scaleValue =
+            [((NSNumber *)[scaling objectForKey:kSCALING_VALUE])floatValue];
+        imageView.layer.anchorPoint = anchorPoint;
+
+        CGFloat rotation = asin(imageView.transform.b);
+        imageView.transform = CGAffineTransformIdentity;
+        imageView.transform =
+            CGAffineTransformScale(imageView.transform, scaleValue, scaleValue);
+        imageView.transform =
+            CGAffineTransformRotate(imageView.transform, rotation);
+
+        NSLog(@"🔹applied scale %f at anchor point %f, %f", scaleValue,
+              imageView.layer.anchorPoint.x, imageView.layer.anchorPoint.y);
+      }
+    }
+  }
+}
+
+- (void)restoreAccumulatedTransformationValue {
+  NSString *transformationType =
+      [[self currentTransformation].allKeys firstObject];
   if ([transformationType
           isEqualToString:kTIME_SLOT_VALUE_TRANSFORMATION_TRANSLATION]) {
-    NSValue *pointValue = transformation.allValues.firstObject;
+    // restore accumulated transformation value
+    NSValue *pointValue = [self currentTransformation].allValues.firstObject;
     CGPoint translation = [pointValue CGPointValue];
-    CGPoint imageViewPosition = imageView.center;
-    imageViewPosition.x += translation.x;
-    imageViewPosition.y += translation.y;
-    imageView.center = imageViewPosition;
-    NSLog(@"🔹apply translation: %@", NSStringFromCGPoint(translation));
+    self.accumulatedTranslateValue = translation;
   } else if ([transformationType
                  isEqualToString:kTIME_SLOT_VALUE_TRANSFORMATION_ROTATION]) {
-    // TODO: rotation
+
+    // TODO: restore rotation
   } else if ([transformationType
                  isEqualToString:kTIME_SLOT_VALUE_TRANSFORMATION_SCALING]) {
     // TODO: scaling
   }
 }
 
-- (void)restoreAccumulatedTransformationValue {
-  // restore accumulated transformation value
-  NSValue *pointValue = [self currentTransformation].allValues.firstObject;
-  CGPoint translation = [pointValue CGPointValue];
-  self.accumulatedTranslateValue = translation;
-  // TODO: restore rotation and scaling
+- (void)clearCurrentImageViewTransformation {
+  NSMutableArray *timeSlotValue = self.timeSlots[self.activatedTimeSlotKey];
+  timeSlotValue[kTIME_SLOT_VALUE_TRANSFORMATION] =
+      [NSMutableDictionary dictionary];
+
+  UIImageView *imageView =
+      self.timeSlotToImageViewMap[self.activatedTimeSlotKey];
+  imageView.center = self.animatingViewInitialCenter;
+  imageView.transform = CGAffineTransformIdentity;
+  imageView.layer.anchorPoint = CGPointMake(0.5f, 0.5f);
+
+  [self applyTransformationsBeforeActivatedTimeSlot];
+
+  [self clearAccumulatedValue];
 }
 
+- (void)clearAccumulatedValue {
+  self.accumulatedTranslateValue = CGPointZero;
+  self.accumulatedRotationAngle = 0.0f;
+}
+
+- (void)applyTransformationsBeforeActivatedTimeSlot {
+  // apply all transformation to imageviews before selected imageview
+  for (int i = 0;
+       i <= [self.sortedTimeSlots indexOfObject:self.activatedTimeSlotKey];
+       i++) {
+    [self applyTransformationToImageView:self.timeSlotToImageViewMap
+                                             [self.sortedTimeSlots[i]]
+                        atAndBeforeIndex:i];
+  }
+}
+
+- (CGPoint)totalTranslationBeforeCurrentTimeSlot {
+  CGPoint totalTranslation = CGPointZero;
+  for (int i = 0;
+       i <= [self.sortedTimeSlots indexOfObject:self.activatedTimeSlotKey];
+       i++) {
+    NSMutableDictionary *transformation =
+        [self transformationForTimeslotAtIndex:i];
+    NSString *transformationType = [transformation.allKeys firstObject];
+    if ([transformationType
+            isEqualToString:kTIME_SLOT_VALUE_TRANSFORMATION_TRANSLATION]) {
+      NSValue *pointValue = transformation.allValues.firstObject;
+      CGPoint translation = [pointValue CGPointValue];
+      totalTranslation.x += translation.x;
+      totalTranslation.y += translation.y;
+    }
+  }
+  return totalTranslation;
+}
+
+#pragma mark - Quick getters for time slots
+
 - (NSMutableDictionary *)transformationForTimeslotAtIndex:(NSInteger)index {
-  NSMutableArray *timeSlotValue = self.timeSlots[self.sortedTimeSlots[index]];
+  return [self transformationInfoForTimeSlot:self.sortedTimeSlots[index]];
+}
+
+- (NSMutableDictionary *)transformationInfoForTimeSlot:
+                             (NSMutableArray *)timeSlot {
+  NSMutableArray *timeSlotValue = self.timeSlots[timeSlot];
+  NSMutableDictionary *transformation =
+      timeSlotValue[kTIME_SLOT_VALUE_TRANSFORMATION];
+  return transformation;
+}
+
+- (NSMutableDictionary *)currentTransformation {
+  NSMutableArray *timeSlotValue = self.timeSlots[self.activatedTimeSlotKey];
   NSMutableDictionary *transformation =
       timeSlotValue[kTIME_SLOT_VALUE_TRANSFORMATION];
   return transformation;

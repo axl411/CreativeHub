@@ -22,6 +22,16 @@
 #define kTIME_SLOT_VALUE_TRANSFORMATION_TRANSLATION @"translation"
 #define kTIME_SLOT_VALUE_TRANSFORMATION_ROTATION @"rotation"
 #define kTIME_SLOT_VALUE_TRANSFORMATION_SCALING @"scaling"
+#define kTIME_SLOT_VALUE_TRANSFORMATION_ANCHOR_POINT_OFFSET                    \
+  @"anchor point offset"
+
+#define kROTATION_ANCHOR_POINT @"anchor point"
+#define kROTATION_VALUE @"value"
+#define kROTATION_CENTER @"center"
+
+#define kSCALING_ANCHOR_POINT @"anchor point"
+#define kSCALING_VALUE @"value"
+#define kSCALING_CENTER @"center"
 
 #define kTIME_SLOT_VALUE_VIEWS_BODY 0
 #define kTIME_SLOT_VALUE_VIEWS_LOWER_HANDLE 1

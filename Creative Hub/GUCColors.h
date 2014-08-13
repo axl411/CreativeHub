@@ -33,6 +33,8 @@
   [UIColor colorWithRed:0.208 green:0.667 blue:0.863 alpha:1]
 #define TIME_SLOT_LOWER_HANDLE_COLOR                                           \
   [UIColor colorWithRed:0.675 green:0.851 blue:0.925 alpha:1]
+#define ANIMATING_VIEW_ANCHOR_POINT_COLOR                                      \
+  [UIColor colorWithRed:1 green:0.176 blue:0.333 alpha:1]
 
 @interface GUCColors : NSObject
 

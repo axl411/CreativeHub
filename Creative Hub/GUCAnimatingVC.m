@@ -32,6 +32,7 @@
 @property(nonatomic) UIDynamicAnimator *animator;
 @property(weak, nonatomic) IBOutlet UIView *actionButtonsView;
 @property(nonatomic) UIBarButtonItem *playBarButton;
+/** Frames of animation in a single time piece */
 @property(nonatomic) NSInteger steps;
 
 @end
@@ -407,14 +408,13 @@
 
   NSArray *allTransformations = [self allTransformations];
 
-  //  NSMutableArray *oldAlphaValuesOfImageViews = [NSMutableArray array];
-  //  NSMutableArray *oldAlphaValuesOfAnimatingViews = [NSMutableArray array];
+  for (GUCAnimatingControl *control in self.animatingControls) {
+    [control.pulsingHeloLayer removeFromSuperlayer];
+    [control.anchorPointView removeFromSuperview];
+  }
+
   for (GUCAnimatingView *view in self.animatingViews) {
     view.containerView.hidden = YES;
-    //    [oldAlphaValuesOfImageViews
-    //        addObject:[NSNumber numberWithFloat:view.rootImageView.alpha]];
-    //    [oldAlphaValuesOfAnimatingViews
-    //        addObject:[NSNumber numberWithFloat:view.alpha]];
     view.rootImageView.alpha = 1.0f;
     view.alpha = 1.0f;
   }
@@ -425,10 +425,14 @@
       UIImageView *imageView = animatingControl.animatingView.rootImageView;
 
       NSArray *transformations = allTransformations[j];
-      NSMutableDictionary *stepTransformation = transformations[i / self.steps];
 
-      if (![stepTransformation isKindOfClass:[NSNull class]]) {
-        [self applyTransformation:stepTransformation toView:imageView];
+      if (i / self.steps < transformations.count) {
+        NSMutableDictionary *stepTransformation =
+            transformations[i / self.steps];
+
+        if (![stepTransformation isKindOfClass:[NSNull class]]) {
+          [self applyTransformation:stepTransformation toView:imageView];
+        }
       }
     }
 
@@ -440,15 +444,8 @@
     view.containerView.hidden = NO;
     view.transform = CGAffineTransformIdentity;
     view.rootImageView.center = view.center;
-    //    NSNumber *imageViewAlphaNumber = [oldAlphaValuesOfImageViews
-    //    lastObject];
-    //    NSNumber *animatingViewAlphaNumber =
-    //        [oldAlphaValuesOfAnimatingViews lastObject];
-    //    view.rootImageView.alpha = [imageViewAlphaNumber floatValue];
-    //    view.alpha = [animatingViewAlphaNumber floatValue];
-    //    NSLog(@"🔹%f, %f", view.rootImageView.alpha, view.alpha);
-    //    [oldAlphaValuesOfImageViews removeLastObject];
-    //    [oldAlphaValuesOfAnimatingViews removeLastObject];
+    view.rootImageView.layer.anchorPoint = CGPointMake(0.5f, 0.5f);
+    view.rootImageView.transform = CGAffineTransformIdentity;
   }
 
   return [NSArray arrayWithArray:images];
@@ -485,25 +482,88 @@
         NSMutableDictionary *transformation =
             timeSlotValue[kTIME_SLOT_VALUE_TRANSFORMATION];
         //      NSLog(@"🔹transformation: %@", transformation);
-        NSString *type = transformation.allKeys.firstObject;
-        //      NSLog(@"🔹type: %@", type);
-        if ([type
-                isEqualToString:kTIME_SLOT_VALUE_TRANSFORMATION_TRANSLATION]) {
-          NSValue *pointValue = transformation.allValues.firstObject;
-          CGPoint translation = [pointValue CGPointValue];
-          CGPoint translationEachStep =
-              CGPointMake(translation.x / (self.steps * timeSlotKey.count),
-                          translation.y / (self.steps * timeSlotKey.count));
-          NSMutableDictionary *stepTranslation =
-              [NSMutableDictionary dictionary];
-          [stepTranslation
-              setObject:[NSValue valueWithCGPoint:translationEachStep]
-                 forKey:kTIME_SLOT_VALUE_TRANSFORMATION_TRANSLATION];
-          [transformations addObject:stepTranslation];
-          //        NSLog(@"🔹%d is %@, value: %@", i, type,
-          //              NSStringFromCGPoint(translationEachStep));
-        } else {
-          [transformations addObject:[NSNull null]];
+
+        NSArray *transformationKeys = transformation.allKeys;
+        for (NSString *key in transformationKeys) {
+          if (![key isEqualToString:
+                        kTIME_SLOT_VALUE_TRANSFORMATION_ANCHOR_POINT_OFFSET]) {
+            NSString *transformationType = key;
+            if ([transformationType
+                    isEqualToString:
+                        kTIME_SLOT_VALUE_TRANSFORMATION_TRANSLATION]) {
+              NSValue *pointValue = [transformation
+                  objectForKey:kTIME_SLOT_VALUE_TRANSFORMATION_TRANSLATION];
+              CGPoint translation = [pointValue CGPointValue];
+              CGPoint translationEachStep =
+                  CGPointMake(translation.x / (self.steps * timeSlotKey.count),
+                              translation.y / (self.steps * timeSlotKey.count));
+              NSMutableDictionary *stepTranslation =
+                  [NSMutableDictionary dictionary];
+              [stepTranslation
+                  setObject:[NSValue valueWithCGPoint:translationEachStep]
+                     forKey:kTIME_SLOT_VALUE_TRANSFORMATION_TRANSLATION];
+              [stepTranslation setObject:@"translation" forKey:@"type"];
+              [transformations addObject:stepTranslation];
+            } else if ([transformationType
+                           isEqualToString:
+                               kTIME_SLOT_VALUE_TRANSFORMATION_ROTATION]) {
+              NSMutableDictionary *rotation = [transformation
+                  objectForKey:kTIME_SLOT_VALUE_TRANSFORMATION_ROTATION];
+              CGPoint anchorPoint =
+                  [((NSValue *)[rotation objectForKey:kROTATION_ANCHOR_POINT])
+                      CGPointValue];
+              CGPoint center =
+                  [((NSValue *)[rotation objectForKey:kROTATION_CENTER])
+                      CGPointValue];
+              CGFloat rotationValue =
+                  [((NSNumber *)[rotation objectForKey:kROTATION_VALUE])
+                      floatValue];
+              CGFloat stepRotationValue =
+                  rotationValue / (self.steps * timeSlotKey.count);
+
+              NSMutableDictionary *stepRotation =
+                  [NSMutableDictionary dictionary];
+              [stepRotation
+                  setObject:[NSNumber numberWithFloat:stepRotationValue]
+                     forKey:kROTATION_VALUE];
+              [stepRotation setObject:[NSValue valueWithCGPoint:anchorPoint]
+                               forKey:kROTATION_ANCHOR_POINT];
+              [stepRotation setObject:[NSValue valueWithCGPoint:center]
+                               forKey:kROTATION_CENTER];
+              [stepRotation setObject:@"rotation" forKey:@"type"];
+              [transformations addObject:stepRotation];
+            } else if ([transformationType
+                           isEqualToString:
+                               kTIME_SLOT_VALUE_TRANSFORMATION_SCALING]) {
+              NSMutableDictionary *scaling = [transformation
+                  objectForKey:kTIME_SLOT_VALUE_TRANSFORMATION_SCALING];
+              CGPoint anchorPoint =
+                  [((NSValue *)[scaling objectForKey:kSCALING_ANCHOR_POINT])
+                      CGPointValue];
+              CGPoint center =
+                  [((NSValue *)[scaling objectForKey:kSCALING_CENTER])
+                      CGPointValue];
+              CGFloat scaleValue = [(
+                  (NSNumber *)[scaling objectForKey:kSCALING_VALUE])floatValue];
+
+              NSInteger a = (NSInteger)(self.steps * timeSlotKey.count);
+              CGFloat b = scaleValue;
+              CGFloat stepScaleValue = pow(10, log10(b) / a);
+
+              NSMutableDictionary *stepScaling =
+                  [NSMutableDictionary dictionary];
+              [stepScaling setObject:[NSNumber numberWithFloat:stepScaleValue]
+                              forKey:kSCALING_VALUE];
+              [stepScaling setObject:[NSValue valueWithCGPoint:anchorPoint]
+                              forKey:kSCALING_ANCHOR_POINT];
+              [stepScaling setObject:[NSValue valueWithCGPoint:center]
+                              forKey:kSCALING_CENTER];
+              [stepScaling setObject:@"scaling" forKey:@"type"];
+              [transformations addObject:stepScaling];
+            }
+          } else {
+            // get offset
+          }
         }
       }
     } else {
@@ -529,18 +589,46 @@
 
 - (void)applyTransformation:(NSMutableDictionary *)stepTransformation
                      toView:(UIView *)view {
-  NSString *type = stepTransformation.allKeys.firstObject;
-  if ([type isEqualToString:kTIME_SLOT_VALUE_TRANSFORMATION_TRANSLATION]) {
+  NSString *type = [stepTransformation objectForKey:@"type"];
+  if ([type isEqualToString:@"translation"]) {
     CGPoint viewLocation = view.center;
-    NSValue *value = stepTransformation.allValues.firstObject;
+    NSValue *value = [stepTransformation
+        objectForKey:kTIME_SLOT_VALUE_TRANSFORMATION_TRANSLATION];
     CGPoint translation = [value CGPointValue];
 
     viewLocation.x += translation.x;
     viewLocation.y += translation.y;
 
     view.center = viewLocation;
-  } else {
-    // TODO: rotation and scaling
+  } else if ([type isEqualToString:@"rotation"]) {
+    NSNumber *rotationValueObject =
+        [stepTransformation objectForKey:kROTATION_VALUE];
+    NSValue *anchorPointValue =
+        [stepTransformation objectForKey:kROTATION_ANCHOR_POINT];
+    NSValue *centerPointValue =
+        [stepTransformation objectForKey:kROTATION_CENTER];
+    CGFloat rotationValue = [rotationValueObject floatValue];
+    CGPoint anchorPoint = [anchorPointValue CGPointValue];
+    CGPoint centerPoint = [centerPointValue CGPointValue];
+
+    [view.layer setAnchorPoint:anchorPoint];
+    view.transform = CGAffineTransformRotate(view.transform, rotationValue);
+    view.center = centerPoint;
+  } else if ([type isEqualToString:@"scaling"]) {
+    NSNumber *scalingValueObject =
+        [stepTransformation objectForKey:kSCALING_VALUE];
+    NSValue *anchorPointValue =
+        [stepTransformation objectForKey:kSCALING_ANCHOR_POINT];
+    NSValue *centerPointValue =
+        [stepTransformation objectForKey:kSCALING_CENTER];
+    CGFloat scaleValue = [scalingValueObject floatValue];
+    CGPoint anchorPoint = [anchorPointValue CGPointValue];
+    CGPoint centerPoint = [centerPointValue CGPointValue];
+
+    [view.layer setAnchorPoint:anchorPoint];
+    view.transform =
+        CGAffineTransformScale(view.transform, scaleValue, scaleValue);
+    view.center = centerPoint;
   }
 }
 

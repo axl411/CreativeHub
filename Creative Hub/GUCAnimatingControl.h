@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <PulsingHaloLayer.h>
 
 @class GUCTimeBar, GUCAnimatingView, GUCLayersScrollView;
 @protocol GUCAnimatingControlDelegate;
@@ -23,6 +24,9 @@
 @property(nonatomic) NSMutableArray *availableTimePieces;
 /** Stores all timeslots as an array, in ascending order */
 @property(nonatomic) NSMutableArray *sortedTimeSlots;
+/** The view at the location of the anchor point of the animating view */
+@property(nonatomic) UIView *anchorPointView;
+@property(nonatomic) PulsingHaloLayer *pulsingHeloLayer;
 
 - (instancetype)initWithTimeBarView:(GUCTimeBar *)timeBar
                       animatingView:(GUCAnimatingView *)animatingView
@@ -51,6 +55,6 @@
 - (void)animatingControlDidUnchooseAction:
         (GUCAnimatingControl *)animatingControl;
 - (void)animatingControlDidToggleActionsView:
-(GUCAnimatingControl *)animatingControl;
+        (GUCAnimatingControl *)animatingControl;
 
 @end

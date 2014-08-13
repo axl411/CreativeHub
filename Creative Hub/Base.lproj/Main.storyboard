@@ -379,7 +379,7 @@
                                     <constraint firstAttribute="height" constant="60" id="fDu-1d-9OD"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t8C-R4-E0M">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t8C-R4-E0M" userLabel="transformationView">
                                 <rect key="frame" x="0.0" y="568" width="320" height="90"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
