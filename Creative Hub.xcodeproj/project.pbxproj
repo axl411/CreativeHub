@@ -30,6 +30,7 @@
 		ADA38F2A1961C6B2000420EE /* GUCLayersVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA38F291961C6B2000420EE /* GUCLayersVC.m */; };
 		ADA38F2D1961C975000420EE /* GUCLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA38F2C1961C975000420EE /* GUCLayer.m */; };
 		ADA40BCA196A0438005603F4 /* GUCColorPickerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA40BC9196A0438005603F4 /* GUCColorPickerVC.m */; };
+		ADB4C083199C98AA004FBD03 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADB4C082199C98AA004FBD03 /* MessageUI.framework */; };
 		ADC02470197D62600062081E /* GUCShowAnimationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC0246F197D62600062081E /* GUCShowAnimationVC.m */; };
 		ADC02473197DACEF0062081E /* GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC02472197DACEF0062081E /* GIF.m */; };
 		ADDBB244197193440079BEA8 /* GUCAnimatingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDBB243197193440079BEA8 /* GUCAnimatingVC.m */; };
@@ -104,6 +105,7 @@
 		ADA38F2C1961C975000420EE /* GUCLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUCLayer.m; sourceTree = "<group>"; };
 		ADA40BC8196A0438005603F4 /* GUCColorPickerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUCColorPickerVC.h; sourceTree = "<group>"; };
 		ADA40BC9196A0438005603F4 /* GUCColorPickerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUCColorPickerVC.m; sourceTree = "<group>"; };
+		ADB4C082199C98AA004FBD03 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		ADC0246E197D62600062081E /* GUCShowAnimationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUCShowAnimationVC.h; sourceTree = "<group>"; };
 		ADC0246F197D62600062081E /* GUCShowAnimationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUCShowAnimationVC.m; sourceTree = "<group>"; };
 		ADC02471197DACEF0062081E /* GIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GIF.h; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADB4C083199C98AA004FBD03 /* MessageUI.framework in Frameworks */,
 				AD98E7AE196EEB3300DAFFB5 /* CoreData.framework in Frameworks */,
 				ADE09CE6195744D500EDA814 /* CoreGraphics.framework in Frameworks */,
 				ADE09CE8195744D500EDA814 /* UIKit.framework in Frameworks */,
@@ -339,6 +342,7 @@
 		ADE09CE2195744D500EDA814 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ADB4C082199C98AA004FBD03 /* MessageUI.framework */,
 				AD98E7AD196EEB3300DAFFB5 /* CoreData.framework */,
 				ADE09D2F1957661F00EDA814 /* libxml2.dylib */,
 				ADE09CE3195744D500EDA814 /* Foundation.framework */,
@@ -360,7 +364,6 @@
 				AD6AFA5D195F50CE0064090E /* Models */,
 				ADDD921719576FB0000B1C0F /* Controllers */,
 				AD6AFA59195F2EA90064090E /* Views */,
-				ADED55711969B23800090684 /* Helper */,
 				ADE09CEA195744D500EDA814 /* Supporting Files */,
 			);
 			path = "Creative Hub";
@@ -394,13 +397,6 @@
 				ADE09D0B195744D500EDA814 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		ADED55711969B23800090684 /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

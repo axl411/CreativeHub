@@ -59,6 +59,7 @@
 @property(nonatomic) NSInteger currentBiggestSketchingViewTag;
 
 @property(nonatomic) UIImagePickerController *imagePicker;
+@property(nonatomic) UIImagePickerController *albumImagePicker;
 /** The index of the sketching view being re positioned in the sketching views
  *  array, which is used to placing the view back */
 @property(nonatomic) NSUInteger indexOfSketchingViewBeingRePositioned;
@@ -77,10 +78,44 @@
     _imagePicker = [[UIImagePickerController alloc] init];
     _imagePicker.delegate = self;
     _imagePicker.allowsEditing = NO;
-    _imagePicker.mediaTypes = @[ (NSString *)kUTTypeImage ];
     _imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    _imagePicker.mediaTypes = @[ (NSString *)kUTTypeImage ];
+    [_imagePicker.navigationBar
+        setTintColor:
+            [UIColor colorWithRed:0.969 green:0.969 blue:0.969 alpha:1]];
+    [_imagePicker.navigationBar
+        setTitleTextAttributes:[NSDictionary
+                                   dictionaryWithObjectsAndKeys:
+                                       [UIColor colorWithRed:245.0 / 255.0
+                                                       green:245.0 / 255.0
+                                                        blue:245.0 / 255.0
+                                                       alpha:1.0],
+                                       NSForegroundColorAttributeName, nil]];
   }
   return _imagePicker;
+}
+
+- (UIImagePickerController *)albumImagePicker {
+  if (!_albumImagePicker) {
+    _albumImagePicker = [[UIImagePickerController alloc] init];
+    _albumImagePicker.delegate = self;
+    _albumImagePicker.allowsEditing = NO;
+    _albumImagePicker.sourceType =
+        UIImagePickerControllerSourceTypePhotoLibrary;
+    _albumImagePicker.mediaTypes = @[ (NSString *)kUTTypeImage ];
+    [_albumImagePicker.navigationBar
+        setTintColor:
+            [UIColor colorWithRed:0.969 green:0.969 blue:0.969 alpha:1]];
+    [_albumImagePicker.navigationBar
+        setTitleTextAttributes:[NSDictionary
+                                   dictionaryWithObjectsAndKeys:
+                                       [UIColor colorWithRed:245.0 / 255.0
+                                                       green:245.0 / 255.0
+                                                        blue:245.0 / 255.0
+                                                       alpha:1.0],
+                                       NSForegroundColorAttributeName, nil]];
+  }
+  return _albumImagePicker;
 }
 
 - (UIPinchGestureRecognizer *)pinchRecognizer {
@@ -641,20 +676,44 @@
 
   vActionSheet.doButtonHeight = 40.0f;
 
-  [vActionSheet showC:@"How would you like to add external images?"
-               cancel:@"Cancel"
-              buttons:@[ @"From Web URL", @"From Camera" ]
-               result:^(int nResult) {
+  if ([UIImagePickerController
+          isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+    [vActionSheet showC:@"How would you like to add external images?"
+                 cancel:@"Cancel"
+                buttons:@[ @"From Camera", @"From Album", @"From Web" ]
+                 result:^(int nResult) {
 
-                   if (nResult == 0) {
-                     [self performSegueWithIdentifier:@"canvasToWebImagesIndex"
+                     if (nResult == 0) {
+                       [self presentViewController:self.imagePicker
+                                          animated:NO
+                                        completion:nil];
+                     } else if (nResult == 1) {
+                       [self presentViewController:self.albumImagePicker
+                                          animated:NO
+                                        completion:nil];
+                     } else if (nResult == 2) {
+                       [self
+                           performSegueWithIdentifier:@"canvasToWebImagesIndex"
                                                sender:nil];
-                   } else if (nResult == 1) {
-                     [self presentViewController:self.imagePicker
-                                        animated:NO
-                                      completion:nil];
-                   }
-               }];
+                     }
+                 }];
+  } else {
+    [vActionSheet showC:@"How would you like to add external images?"
+                 cancel:@"Cancel"
+                buttons:@[ @"From Album", @"From Web" ]
+                 result:^(int nResult) {
+
+                     if (nResult == 0) {
+                       [self presentViewController:self.albumImagePicker
+                                          animated:NO
+                                        completion:nil];
+                     } else if (nResult == 1) {
+                       [self
+                           performSegueWithIdentifier:@"canvasToWebImagesIndex"
+                                               sender:nil];
+                     }
+                 }];
+  }
 }
 
 /**

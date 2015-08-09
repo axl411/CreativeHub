@@ -22,6 +22,9 @@
 
   [[UIApplication sharedApplication]
       setStatusBarStyle:UIStatusBarStyleLightContent];
+
+  [NSThread sleepForTimeInterval:1.0];
+
   return YES;
 }
 

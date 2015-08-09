@@ -1,0 +1,5 @@
+#include "Pods-DoActionSheet.xcconfig"
+GCC_PREPROCESSOR_DEFINITIONS = COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/DoActionSheet" "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/Color-Picker-for-iOS" "${PODS_ROOT}/Headers/DoActionSheet" "${PODS_ROOT}/Headers/FLAnimatedImage" "${PODS_ROOT}/Headers/HTMLReader" "${PODS_ROOT}/Headers/PulsingHalo" "${PODS_ROOT}/Headers/SAMCache"
+OTHER_LDFLAGS = -ObjC
+PODS_ROOT = ${SRCROOT}

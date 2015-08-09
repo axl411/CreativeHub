@@ -41,6 +41,9 @@
 - (void)translatePressed;
 - (void)rotatePressed;
 - (void)scalePressed;
+- (void)panBeganAtLocation:(CGPoint)location;
+- (void)panChangedAtLocation:(CGPoint)location;
+- (void)panEndedAtLocation:(CGPoint)location;
 
 @end
 

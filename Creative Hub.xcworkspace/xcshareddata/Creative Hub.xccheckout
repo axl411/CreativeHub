@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>766D08EA-6256-44ED-8B30-5D471ABBEFAC</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Creative Hub</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>2840620A3B326AC60E6573CBA5655F9D097C89AE</key>
+		<string>https://bitbucket.org/axl411/creative-hub.git</string>
+		<key>BC268EC6-2606-4A35-8FF8-0BE3939E0B7D</key>
+		<string>https://bitbucket.org/axl411/creative-hub.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Creative Hub.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>2840620A3B326AC60E6573CBA5655F9D097C89AE</key>
+		<string>..</string>
+		<key>BC268EC6-2606-4A35-8FF8-0BE3939E0B7D</key>
+		<string>../../Creative Hub</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://bitbucket.org/axl411/creative-hub.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>2840620A3B326AC60E6573CBA5655F9D097C89AE</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>BC268EC6-2606-4A35-8FF8-0BE3939E0B7D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Creative Hub</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2840620A3B326AC60E6573CBA5655F9D097C89AE</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Creative%20Hub</string>
+		</dict>
+	</array>
+</dict>
+</plist>

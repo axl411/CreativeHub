@@ -39,6 +39,8 @@
 @property(nonatomic) CGFloat accumulatedRotationAngle;
 @property(nonatomic) CGPoint anchorPointOffset;
 @property(nonatomic) CGPoint animatingViewInitialCenter;
+@property(nonatomic) BOOL isModifyingTimeSlotLowerEnd;
+@property(nonatomic) BOOL isModifyingTimeSlotUpperEnd;
 
 @end
 
@@ -62,6 +64,8 @@
     self.availableTimePieces = [self initialAvailableTimePieces];
     self.timeSlotToImageViewMap = [NSMutableDictionary dictionary];
     self.sortedTimeSlots = [NSMutableArray array];
+    self.isModifyingTimeSlotLowerEnd = NO;
+    self.isModifyingTimeSlotUpperEnd = NO;
   }
   return self;
 }
@@ -259,6 +263,75 @@
   self.pulsingHeloLayer.position = self.anchorPointView.center;
   [self.animatingView.layer insertSublayer:self.pulsingHeloLayer
                                      below:self.anchorPointView.layer];
+}
+
+- (void)panBeganAtLocation:(CGPoint)location {
+  NSLog(@"🔹1");
+  NSInteger timePieceIndex =
+      (NSInteger)(location.x / [self widthOfSingleTimePiece]);
+
+  if ([self timePieceIndex:timePieceIndex
+          isInsideTimeSlotKey:self.activatedTimeSlotKey]) {
+    NSLog(@"🔹2");
+    NSInteger timeSlotLowerEnd =
+        [((NSNumber *)[self.activatedTimeSlotKey firstObject])integerValue];
+    NSInteger timeSlotUpperEnd =
+        [((NSNumber *)[self.activatedTimeSlotKey lastObject])integerValue];
+    NSLog(@"🔹3");
+    if (timePieceIndex == timeSlotLowerEnd) {
+      NSLog(@"🔹4");
+      self.isModifyingTimeSlotLowerEnd = YES;
+      NSMutableArray *timeSlotValueViews =
+          [self timeSlotValueViewsForTimeSlotKey:self.activatedTimeSlotKey];
+      UIView *lowerView =
+          timeSlotValueViews[kTIME_SLOT_VALUE_VIEWS_LOWER_HANDLE];
+      [UIView animateWithDuration:0.2
+                       animations:^{
+                           lowerView.transform = CGAffineTransformScale(
+                               lowerView.transform, 1.5, 1.5);
+                       }];
+    } else if (timePieceIndex == timeSlotUpperEnd) {
+      NSLog(@"🔹5");
+      self.isModifyingTimeSlotUpperEnd = YES;
+      NSMutableArray *timeSlotValueViews =
+          [self timeSlotValueViewsForTimeSlotKey:self.activatedTimeSlotKey];
+      UIView *upperView =
+          timeSlotValueViews[kTIME_SLOT_VALUE_VIEWS_UPPER_HANDLE];
+      [UIView animateWithDuration:0.2
+                       animations:^{
+                           upperView.transform = CGAffineTransformScale(
+                               upperView.transform, 1.5, 1.5);
+                       }];
+    }
+  }
+}
+
+- (void)panChangedAtLocation:(CGPoint)location {
+  NSInteger timePieceIndex =
+      (NSInteger)(location.x / [self widthOfSingleTimePiece]);
+  if (self.isModifyingTimeSlotLowerEnd) {
+    // lower
+  } else if (self.isModifyingTimeSlotUpperEnd) {
+    // upper
+  }
+}
+
+- (void)panEndedAtLocation:(CGPoint)location {
+  NSInteger timePieceIndex =
+      (NSInteger)(location.x / [self widthOfSingleTimePiece]);
+  if (self.isModifyingTimeSlotUpperEnd) {
+    NSMutableArray *timeSlotValueViews =
+        [self timeSlotValueViewsForTimeSlotKey:self.activatedTimeSlotKey];
+    UIView *upperView = timeSlotValueViews[kTIME_SLOT_VALUE_VIEWS_UPPER_HANDLE];
+    upperView.transform = CGAffineTransformIdentity;
+    self.isModifyingTimeSlotUpperEnd = NO;
+  } else if (self.isModifyingTimeSlotLowerEnd) {
+    NSMutableArray *timeSlotValueViews =
+        [self timeSlotValueViewsForTimeSlotKey:self.activatedTimeSlotKey];
+    UIView *lowerView = timeSlotValueViews[kTIME_SLOT_VALUE_VIEWS_LOWER_HANDLE];
+    lowerView.transform = CGAffineTransformIdentity;
+    self.isModifyingTimeSlotLowerEnd = NO;
+  }
 }
 
 #pragma mark - Gesture Methods for Translation, Rotation and Scaling
@@ -521,6 +594,13 @@
     }
   }
   return NO;
+}
+
+- (NSMutableArray *)timeSlotValueViewsForTimeSlotKey:
+                        (NSMutableArray *)timeSlotKey {
+  NSMutableArray *timeSlotValue = [self.timeSlots objectForKey:timeSlotKey];
+  NSMutableArray *timeSlotValueViews = timeSlotValue[kTIME_SLOT_VALUE_VIEWS];
+  return timeSlotValueViews;
 }
 
 - (NSMutableArray *)timeSlotKeyForTimePieceIndex:(NSInteger)index {

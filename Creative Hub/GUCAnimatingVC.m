@@ -166,32 +166,34 @@
 
 - (void)layersScrollView:(GUCLayersScrollView *)layersScrollView
     didSelectImageViewAtIndex:(NSUInteger)index {
-  if (index != self.activatedAnimatingViewIndex) {
-    if (![self.animator isRunning]) {
-      for (UIImageView *imageView in self.layersScrollView.imageViews) {
-        if ([self.layersScrollView.imageViews indexOfObject:imageView] ==
-            index) {
-          imageView.backgroundColor = [UIColor colorWithRed:220.0 / 255.0
-                                                      green:220.0 / 255.0
-                                                       blue:220.0 / 255.0
-                                                      alpha:1.0];
-        } else {
-          imageView.backgroundColor = [UIColor colorWithRed:247.0 / 255.0
-                                                      green:247.0 / 255.0
-                                                       blue:247.0 / 255.0
-                                                      alpha:1.0];
+  if (index < self.animatingViews.count) {
+    if (index != self.activatedAnimatingViewIndex) {
+      if (![self.animator isRunning]) {
+        for (UIImageView *imageView in self.layersScrollView.imageViews) {
+          if ([self.layersScrollView.imageViews indexOfObject:imageView] ==
+              index) {
+            imageView.backgroundColor = [UIColor colorWithRed:220.0 / 255.0
+                                                        green:220.0 / 255.0
+                                                         blue:220.0 / 255.0
+                                                        alpha:1.0];
+          } else {
+            imageView.backgroundColor = [UIColor colorWithRed:247.0 / 255.0
+                                                        green:247.0 / 255.0
+                                                         blue:247.0 / 255.0
+                                                        alpha:1.0];
+          }
         }
+
+        self.activatedAnimatingViewIndex = index;
+        [self highlightAnimatingViewWithIndex:index];
+        [self enableActivatedAnimatingViewUserInteraction];
+
+        for (GUCAnimatingControl *animatingControl in self.animatingControls) {
+          [animatingControl unloadUI];
+        }
+
+        [[self activatedAnimatingControl] loadUI];
       }
-
-      self.activatedAnimatingViewIndex = index;
-      [self highlightAnimatingViewWithIndex:index];
-      [self enableActivatedAnimatingViewUserInteraction];
-
-      for (GUCAnimatingControl *animatingControl in self.animatingControls) {
-        [animatingControl unloadUI];
-      }
-
-      [[self activatedAnimatingControl] loadUI];
     }
   }
 }
@@ -292,8 +294,14 @@
     draggedAtLocationInTimeBar:(CGPoint)location
                 withRecognizer:(UIPanGestureRecognizer *)panRecognizer {
   if (!self.animator.isRunning) {
-    NSLog(@"🔹dragged");
-    // TODO: drag to modify the time period
+    if (panRecognizer.state == UIGestureRecognizerStateBegan) {
+      [[self activatedAnimatingControl] panBeganAtLocation:location];
+    } else if (panRecognizer.state == UIGestureRecognizerStateChanged) {
+      [[self activatedAnimatingControl] panChangedAtLocation:location];
+    } else if (panRecognizer.state == UIGestureRecognizerStateEnded ||
+               panRecognizer.state == UIGestureRecognizerStateCancelled) {
+      [[self activatedAnimatingControl] panEndedAtLocation:location];
+    }
   }
 }
 

@@ -1,0 +1,25 @@
+PODS:
+  - Color-Picker-for-iOS (2.0)
+  - DoActionSheet (1.0)
+  - FLAnimatedImage (1.0.0)
+  - HTMLReader (0.5.5)
+  - PulsingHalo (0.0.1)
+  - SAMCache (0.3.0)
+
+DEPENDENCIES:
+  - Color-Picker-for-iOS (~> 2.0)
+  - DoActionSheet
+  - FLAnimatedImage (~> 1.0)
+  - HTMLReader
+  - PulsingHalo
+  - SAMCache
+
+SPEC CHECKSUMS:
+  Color-Picker-for-iOS: 2eec454aa6b24a8b7c2537da0f61c6ead936949e
+  DoActionSheet: 601ad4f2bc440adee60141e0bbdd9d63cdfcbf81
+  FLAnimatedImage: 63b534e4703c01cc9a3dcf32f4a841ff20e25422
+  HTMLReader: ac0aac91128d4a222741c58a63fe7e6940fb10cd
+  PulsingHalo: 4f5fbc25f9efb9f949e4ddad05ca885a11667aa0
+  SAMCache: ab96161f1938a85b0fd426958fc7f36e29a9fe27
+
+COCOAPODS: 0.32.1
